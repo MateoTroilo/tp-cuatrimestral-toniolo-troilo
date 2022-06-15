@@ -2,7 +2,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Table runat="server" CssClass="table">
+
+    <asp:GridView ID="dgvTurnos" runat="server"></asp:GridView>
+
+
+    <%--<asp:Table runat="server" CssClass="table">
         <asp:TableHeaderRow>
             <asp:TableHeaderCell># Turno</asp:TableHeaderCell>
             <asp:TableHeaderCell>Dia</asp:TableHeaderCell>
@@ -26,5 +30,5 @@
             </asp:TableCell>
             <asp:TableCell>Observaciones 1</asp:TableCell>
         </asp:TableRow>
-    </asp:Table>
+    </asp:Table>--%>
 </asp:Content>

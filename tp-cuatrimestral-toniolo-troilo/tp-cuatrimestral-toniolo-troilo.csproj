@@ -83,6 +83,9 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AccesoDB.cs" />
+    <Compile Include="Interface1.cs" />
+    <Compile Include="Turno.cs" />
     <Compile Include="Medico-Turno.aspx.cs">
       <DependentUpon>Medico-Turno.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
