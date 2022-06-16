@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Recepcionista-Paciente.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Formulario_web13" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Nuevo-Usuario.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Formulario_web15" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -44,16 +44,30 @@
             </div>
 
             <div class="row mb-3">
-                <label for="txtObraSocial" class="col-sm-2 col-form-label">Obra Social</label>
+                <label for="txtUsuario" class="col-sm-2 col-form-label">Usuario</label>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="txtObraSocial" type="text" />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="txtUsuario" type="text" />
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="txtPlan" class="col-sm-2 col-form-label">Plan</label>
+                <label for="txtContrasenia" class="col-sm-2 col-form-label">Contraseña</label>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="txtPlan" type="text" />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="txtContrasenia" type="password" />
+                </div>
+            </div>
+
+
+            <div class="row mb-3">
+                <label for="ltsPermisos" class="col-sm-2 col-form-label">Permisos</label>
+                <div class="col-sm-10">
+                    <asp:DropDownList ID="ltsPermisos"
+                        AutoPostBack="True"
+                        runat="server">
+                        <asp:ListItem Selected="True" Value="Medico"> Médico </asp:ListItem>
+                        <asp:ListItem Value="Recepcionista"> Recepcionista </asp:ListItem>
+                        <asp:ListItem Value="Administrador"> Administrador </asp:ListItem>
+                    </asp:DropDownList>
                 </div>
             </div>
 

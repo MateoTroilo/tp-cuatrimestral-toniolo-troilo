@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Recepcionista-Turno.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Formulario_web12" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Nuevo-Turno.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Formulario_web12" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

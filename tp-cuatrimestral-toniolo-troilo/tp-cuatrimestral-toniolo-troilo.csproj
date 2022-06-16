@@ -68,9 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Nuevo-Usuario.aspx" />
     <Content Include="Medico-Turno.aspx" />
-    <Content Include="Recepcionista-Paciente.aspx" />
-    <Content Include="Recepcionista-Turno.aspx" />
+    <Content Include="Nuevo-Paciente.aspx" />
+    <Content Include="Nuevo-Turno.aspx" />
     <Content Include="Recepcionista-Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -84,6 +85,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="AccesoDB.cs" />
+    <Compile Include="Nuevo-Usuario.aspx.cs">
+      <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nuevo-Usuario.aspx.designer.cs">
+      <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Interface1.cs" />
     <Compile Include="Turno.cs" />
     <Compile Include="Medico-Turno.aspx.cs">
@@ -93,19 +101,19 @@
     <Compile Include="Medico-Turno.aspx.designer.cs">
       <DependentUpon>Medico-Turno.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Recepcionista-Paciente.aspx.cs">
-      <DependentUpon>Recepcionista-Paciente.aspx</DependentUpon>
+    <Compile Include="Nuevo-Paciente.aspx.cs">
+      <DependentUpon>Nuevo-Paciente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Recepcionista-Paciente.aspx.designer.cs">
-      <DependentUpon>Recepcionista-Paciente.aspx</DependentUpon>
+    <Compile Include="Nuevo-Paciente.aspx.designer.cs">
+      <DependentUpon>Nuevo-Paciente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Recepcionista-Turno.aspx.cs">
-      <DependentUpon>Recepcionista-Turno.aspx</DependentUpon>
+    <Compile Include="Nuevo-Turno.aspx.cs">
+      <DependentUpon>Nuevo-Turno.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Recepcionista-Turno.aspx.designer.cs">
-      <DependentUpon>Recepcionista-Turno.aspx</DependentUpon>
+    <Compile Include="Nuevo-Turno.aspx.designer.cs">
+      <DependentUpon>Nuevo-Turno.aspx</DependentUpon>
     </Compile>
     <Compile Include="Recepcionista-Default.aspx.cs">
       <DependentUpon>Recepcionista-Default.aspx</DependentUpon>
