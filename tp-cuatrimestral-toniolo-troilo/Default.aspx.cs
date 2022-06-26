@@ -16,7 +16,29 @@ namespace tp_cuatrimestral_toniolo_troilo
 
         protected void btnLogIn_Click(object sender, EventArgs e)
         {
+            Usuarios usuario;
+            UsuarioNegocio negocio = new UsuarioNegocio();
 
+            try
+            {
+                usuario = new Usuarios(txtEmail.Text, txtPassword.Text, 1);
+                if (negocio.Loguear(usuario))
+                {
+                    Session.Add("qwerusuario", usuario);
+                    Response.Redirect("LoginExitoso.aspx", false);
+                }
+                else
+                {
+                    Session.Add("error", "usero o pass incorrectos");
+                    Response.Redirect("LoginError.aspx", false);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                
+            }
         }
     }
 }

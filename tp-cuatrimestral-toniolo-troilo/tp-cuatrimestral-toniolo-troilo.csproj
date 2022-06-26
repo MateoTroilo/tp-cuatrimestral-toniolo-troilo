@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="LoginExitoso.aspx" />
     <Content Include="Nuevo-Usuario.aspx" />
     <Content Include="Medico-Turno.aspx" />
     <Content Include="Nuevo-Paciente.aspx" />
@@ -75,6 +76,7 @@
     <Content Include="Recepcionista-Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
+    <Content Include="LoginError.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -85,6 +87,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="AccesoDB.cs" />
+    <Compile Include="LoginExitoso.aspx.cs">
+      <DependentUpon>LoginExitoso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginExitoso.aspx.designer.cs">
+      <DependentUpon>LoginExitoso.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Nuevo-Usuario.aspx.cs">
       <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -92,7 +101,7 @@
     <Compile Include="Nuevo-Usuario.aspx.designer.cs">
       <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Interface1.cs" />
+    <Compile Include="TurnosNegocio.cs" />
     <Compile Include="Turno.cs" />
     <Compile Include="Medico-Turno.aspx.cs">
       <DependentUpon>Medico-Turno.aspx</DependentUpon>
@@ -132,6 +141,15 @@
     </Compile>
     <Compile Include="Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioNegocio.cs" />
+    <Compile Include="Usuarios.cs" />
+    <Compile Include="LoginError.aspx.cs">
+      <DependentUpon>LoginError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginError.aspx.designer.cs">
+      <DependentUpon>LoginError.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
