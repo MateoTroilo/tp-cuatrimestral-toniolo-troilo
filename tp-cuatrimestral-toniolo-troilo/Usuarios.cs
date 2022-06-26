@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace tp_cuatrimestral_toniolo_troilo
 {
-    public enum TipoUsuario
+    public class Usuarios : Persona
     {
-        NORMAL = 1,
-        ADMIN = 2,  
-    }
-    public class Usuarios
-    {
-        public int Id { get; set; }
-
         public string Usuario { get; set; }
 
         public string Pass { get; set; }

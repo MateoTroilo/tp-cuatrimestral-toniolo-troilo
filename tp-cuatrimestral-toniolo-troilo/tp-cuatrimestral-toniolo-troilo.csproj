@@ -101,6 +101,9 @@
     <Compile Include="Nuevo-Usuario.aspx.designer.cs">
       <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Paciente.cs" />
+    <Compile Include="PacienteNegocio.cs" />
+    <Compile Include="Persona.cs" />
     <Compile Include="TurnosNegocio.cs" />
     <Compile Include="Turno.cs" />
     <Compile Include="Medico-Turno.aspx.cs">

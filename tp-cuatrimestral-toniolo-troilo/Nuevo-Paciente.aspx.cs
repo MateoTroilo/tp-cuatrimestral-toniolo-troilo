@@ -16,7 +16,18 @@ namespace tp_cuatrimestral_toniolo_troilo
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            Paciente paciente;
+            PacienteNegocio negocio = new PacienteNegocio();
 
+            try
+            {
+                paciente = new Paciente(txtNombre.Text, txtApellido.Text, CalendarDate.SelectedDate, int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
+                negocio.Agregar(paciente);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -44,16 +44,16 @@
             </div>
 
             <div class="row mb-3">
-                <label for="txtObraSocial" class="col-sm-2 col-form-label">Obra Social</label>
+                <label for="CalendarFechaNac" class="col-sm-2 col-form-label">Fecha de nacimiento</label>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="txtObraSocial" type="text" />
+                    <asp:Calendar ID="CalendarDate" runat="server" type="date"></asp:Calendar>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="txtPlan" class="col-sm-2 col-form-label">Plan</label>
+                <label for="txtObraSocial" class="col-sm-2 col-form-label">Plan</label>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="txtPlan" type="text" />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="txtObraSocial" type="text" />
                 </div>
             </div>
 

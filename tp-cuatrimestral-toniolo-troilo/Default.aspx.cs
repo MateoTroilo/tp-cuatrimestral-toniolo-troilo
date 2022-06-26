@@ -24,8 +24,8 @@ namespace tp_cuatrimestral_toniolo_troilo
                 usuario = new Usuarios(txtEmail.Text, txtPassword.Text, 1);
                 if (negocio.Loguear(usuario))
                 {
-                    Session.Add("qwerusuario", usuario);
-                    Response.Redirect("LoginExitoso.aspx", false);
+                    Session.Add("usuario", usuario);
+                    Response.Redirect("LoginExitoso.aspx", false); //no entiendo por que no hace esto
                 }
                 else
                 {
