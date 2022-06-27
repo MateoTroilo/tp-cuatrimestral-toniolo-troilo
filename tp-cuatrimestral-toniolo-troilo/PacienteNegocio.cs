@@ -33,5 +33,33 @@ namespace tp_cuatrimestral_toniolo_troilo
                 db.closeConnection();
             }
         }
+
+        public void Modificar(Paciente paciente)
+        {
+            AccesoDB db = new AccesoDB();
+            try
+            {
+                db.setQuery("update Pacientes set Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, FechaNacimiento = @FechaNacimiento, Email = @Email, ObraSocial = @ObraSocial where Id = @Id");
+                db.setParametros("@Nombre", paciente.Nombre);
+                db.setParametros("@Apellido", paciente.Apellido);
+                db.setParametros("@DNI", paciente.DNI);
+                db.setParametros("@FechaNacimiento", paciente.FechaNacimiento);
+                //db.setParametros("@Sexo", paciente.Sexo);
+                db.setParametros("@Email", paciente.Email);
+                db.setParametros("@IDPlan", paciente.ObraSocial);
+
+                db.run();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                db.closeConnection();
+            }
+        }
+
     }
 }
