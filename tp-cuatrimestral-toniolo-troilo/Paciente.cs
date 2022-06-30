@@ -19,5 +19,9 @@ namespace tp_cuatrimestral_toniolo_troilo
             DNI = dni;
             ObraSocial = obraSocial;
         }
+        public Paciente()
+        { 
+        
+        }
     }
 }

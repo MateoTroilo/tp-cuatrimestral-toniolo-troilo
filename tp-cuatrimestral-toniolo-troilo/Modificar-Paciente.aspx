@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Nuevo-Paciente.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Formulario_web13" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Modificar-Paciente.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Modificar_Paciente" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="row">
         <div class="col-2"></div>
         <div class="col">
@@ -61,4 +61,5 @@
         </div>
         <div class="col-2"></div>
     </div>
+
 </asp:Content>

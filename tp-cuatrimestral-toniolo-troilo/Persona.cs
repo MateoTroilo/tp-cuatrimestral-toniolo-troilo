@@ -15,6 +15,7 @@ namespace tp_cuatrimestral_toniolo_troilo
         public string Apellido { get; set; }
 
         public DateTime FechaNacimiento { get; set; }
+
         public string Sexo { get; set; }
 
         public int DNI { get; set; }

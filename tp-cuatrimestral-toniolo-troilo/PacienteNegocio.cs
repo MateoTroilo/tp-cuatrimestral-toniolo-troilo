@@ -61,5 +61,42 @@ namespace tp_cuatrimestral_toniolo_troilo
             }
         }
 
+        public List<Paciente> listar()
+        {
+            List<Paciente> lista = new List<Paciente>();
+            AccesoDB datos = new AccesoDB();
+
+
+            try
+            {
+                datos.setQuery("select cast(IDPaciente as int) as IDPaciente, cast(Nombre as varchar) as Nombre, cast(Apellido as varchar) as Apellido, cast(DNI as int) as DNI, cast(FechaNacimiento as DateTime) as FechaNacimiento, cast(Email as varchar) as Email from Pacientes");
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    Paciente aux = new Paciente();
+                    aux.Id = (int)datos.Reader["IDPaciente"];
+                    aux.Nombre = (string)datos.Reader["Nombre"];
+                    aux.Apellido = (string)datos.Reader["Apellido"];
+                    aux.DNI = (int)datos.Reader["DNI"];
+                    aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
+                    aux.Email = (string)datos.Reader["Email"];
+
+                    lista.Add(aux);
+                }
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+        }
+
     }
 }

@@ -69,10 +69,12 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="LoginExitoso.aspx" />
+    <Content Include="Modificar-Paciente.aspx" />
     <Content Include="Nuevo-Usuario.aspx" />
     <Content Include="Medico-Turno.aspx" />
     <Content Include="Nuevo-Paciente.aspx" />
     <Content Include="Nuevo-Turno.aspx" />
+    <Content Include="Pacientes.aspx" />
     <Content Include="Recepcionista-Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -87,12 +89,23 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="AccesoDB.cs" />
+    <Compile Include="Especialidad.cs" />
+    <Compile Include="Horario.cs" />
     <Compile Include="LoginExitoso.aspx.cs">
       <DependentUpon>LoginExitoso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LoginExitoso.aspx.designer.cs">
       <DependentUpon>LoginExitoso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MedicoNegocio.cs" />
+    <Compile Include="Medico.cs" />
+    <Compile Include="Modificar-Paciente.aspx.cs">
+      <DependentUpon>Modificar-Paciente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modificar-Paciente.aspx.designer.cs">
+      <DependentUpon>Modificar-Paciente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Nuevo-Usuario.aspx.cs">
       <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
@@ -101,8 +114,16 @@
     <Compile Include="Nuevo-Usuario.aspx.designer.cs">
       <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ObraSocial.cs" />
     <Compile Include="Paciente.cs" />
     <Compile Include="PacienteNegocio.cs" />
+    <Compile Include="Pacientes.aspx.cs">
+      <DependentUpon>Pacientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pacientes.aspx.designer.cs">
+      <DependentUpon>Pacientes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Persona.cs" />
     <Compile Include="TurnosNegocio.cs" />
     <Compile Include="Turno.cs" />
