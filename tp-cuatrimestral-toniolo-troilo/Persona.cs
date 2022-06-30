@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace tp_cuatrimestral_toniolo_troilo
 {
+
+    public enum Permisos
+    {
+        Admin,
+        Medico,
+        Recepcionista
+    }
+
     public class Persona
     {
         public int Id { get; set; }
@@ -21,5 +29,6 @@ namespace tp_cuatrimestral_toniolo_troilo
         public int DNI { get; set; }
 
         public string Email { get; set; }
+        public Permisos Permiso { get; set; }
     }
 }
