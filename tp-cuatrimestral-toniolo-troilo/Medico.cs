@@ -9,6 +9,6 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         public Especialidad Especialidad { get; set; }
 
-        public List<Horario> Horarios { get; set; }
+        public Horario Horario { get; set; }
     }
 }

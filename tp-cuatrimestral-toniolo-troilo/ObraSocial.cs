@@ -8,7 +8,7 @@ namespace tp_cuatrimestral_toniolo_troilo
     public class ObraSocial
     {
         public string Nombre { get; set; }
-        public List <string> Planes { get; set; }
+
         public int Cobertura { get; set; }
     }
 }
