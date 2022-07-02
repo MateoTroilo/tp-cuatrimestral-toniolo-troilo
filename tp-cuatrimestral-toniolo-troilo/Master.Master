@@ -18,24 +18,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="~/">Log in</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a runat="server" class="nav-link dropdown-toggle" href="~/Recepcionista-Default.aspx" role="button" data-bs-toggle="dropdown" aria-expanded="false">Recepcionista</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li class="nav-item">
-                                    <a runat="server" class="nav-link" href="~/Recepcionista-Default.aspx">Turnos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a runat="server" class="nav-link" href="~/Nuevo-Paciente.aspx">Nuevo Paciente</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a runat="server" class="nav-link" href="~/Nuevo-Turno.aspx">Nuevo Turno</a>
-                                </li>
-                            </ul>
+                            <a runat="server" class="nav-link" href="~/Medico-Turno.aspx">Turnos</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="~/Medico-Turno.aspx">Médico</a>
+                            <a runat="server" class="nav-link" href="~/Pacientes.aspx" >Pacientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link" href="~/Medico-Turno.aspx">Médicos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link" href="~/">Log Out</a>
                         </li>
                     </ul>
                 </div>

@@ -16,13 +16,17 @@ namespace tp_cuatrimestral_toniolo_troilo
     }
     public class Horario
     {
-        public Dias dias { get; set; }
+        public List<Dias> Dias { get; set; }
 
-        public List<int> horas { get; set; }
-        //800   (lunes)   
-        //1600
+        public int Inicio { get; set; }
 
-        //900   (martes)
-        //1300
+        public int Fin { get; set; }
+
+        // Lunes / Miercoles / Viernes
+        // 800
+        // 1600
+        // medico
+
+            // list<Horario>
     }
 }

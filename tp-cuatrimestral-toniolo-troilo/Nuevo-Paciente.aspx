@@ -56,7 +56,8 @@
                     <asp:TextBox runat="server" CssClass="form-control" ID="txtObraSocial" type="text" />
                 </div>
             </div>
-
+            
+            
             <asp:Button Text="Guardar" CssClass="btn btn-primary" ID="btnRegistrar" OnClick="btnRegistrar_Click" runat="server" />
         </div>
         <div class="col-2"></div>

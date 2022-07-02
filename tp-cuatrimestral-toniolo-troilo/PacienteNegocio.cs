@@ -69,7 +69,7 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             try
             {
-                datos.setQuery("select cast(IDPaciente as int) as IDPaciente, cast(Nombre as varchar) as Nombre, cast(Apellido as varchar) as Apellido, cast(DNI as int) as DNI, cast(FechaNacimiento as DateTime) as FechaNacimiento, cast(Email as varchar) as Email from Pacientes");
+                datos.setQuery("select cast(IDPaciente as int) as IDPaciente, Nombre, cast(Apellido as varchar) as Apellido, cast(DNI as int) as DNI, cast(FechaNacimiento as DateTime) as FechaNacimiento, cast(Email as varchar) as Email from Pacientes");
                 datos.read();
 
                 while (datos.Reader.Read())

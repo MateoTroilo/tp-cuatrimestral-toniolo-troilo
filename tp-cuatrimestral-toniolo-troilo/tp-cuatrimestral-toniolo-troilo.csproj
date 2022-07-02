@@ -69,7 +69,11 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="LoginExitoso.aspx" />
+    <Content Include="Modificar-ObraSocial.aspx" />
     <Content Include="Modificar-Paciente.aspx" />
+    <Content Include="Modificar-Turno.aspx" />
+    <Content Include="Nueva-ObraSocial.aspx" />
+    <Content Include="Nuevo-Medico.aspx" />
     <Content Include="Nuevo-Usuario.aspx" />
     <Content Include="Medico-Turno.aspx" />
     <Content Include="Nuevo-Paciente.aspx" />
@@ -79,6 +83,7 @@
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="LoginError.aspx" />
+    <Content Include="Nueva-Especialidad.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -100,12 +105,40 @@
     </Compile>
     <Compile Include="MedicoNegocio.cs" />
     <Compile Include="Medico.cs" />
+    <Compile Include="Modificar-ObraSocial.aspx.cs">
+      <DependentUpon>Modificar-ObraSocial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modificar-ObraSocial.aspx.designer.cs">
+      <DependentUpon>Modificar-ObraSocial.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modificar-Paciente.aspx.cs">
       <DependentUpon>Modificar-Paciente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Modificar-Paciente.aspx.designer.cs">
       <DependentUpon>Modificar-Paciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modificar-Turno.aspx.cs">
+      <DependentUpon>Modificar-Turno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modificar-Turno.aspx.designer.cs">
+      <DependentUpon>Modificar-Turno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nueva-ObraSocial.aspx.cs">
+      <DependentUpon>Nueva-ObraSocial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nueva-ObraSocial.aspx.designer.cs">
+      <DependentUpon>Nueva-ObraSocial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nuevo-Medico.aspx.cs">
+      <DependentUpon>Nuevo-Medico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nuevo-Medico.aspx.designer.cs">
+      <DependentUpon>Nuevo-Medico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Nuevo-Usuario.aspx.cs">
       <DependentUpon>Nuevo-Usuario.aspx</DependentUpon>
@@ -174,6 +207,13 @@
     </Compile>
     <Compile Include="LoginError.aspx.designer.cs">
       <DependentUpon>LoginError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nueva-Especialidad.aspx.cs">
+      <DependentUpon>Nueva-Especialidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nueva-Especialidad.aspx.designer.cs">
+      <DependentUpon>Nueva-Especialidad.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

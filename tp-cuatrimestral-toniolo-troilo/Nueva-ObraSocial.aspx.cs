@@ -7,16 +7,16 @@ using System.Web.UI.WebControls;
 
 namespace tp_cuatrimestral_toniolo_troilo
 {
-    public partial class Formulario_web15 : System.Web.UI.Page
+    public partial class Nueva_ObraSocial : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-
-        protected void btnRegistrar_Click(object sender, EventArgs e)
+        protected void btnGuardar_Click(object sender, EventArgs e)
         {
 
         }
+        
     }
 }

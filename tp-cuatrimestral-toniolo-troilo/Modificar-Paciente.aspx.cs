@@ -13,5 +13,8 @@ namespace tp_cuatrimestral_toniolo_troilo
         {
 
         }
+
+        protected void btnRegistrar_Click(object sender, EventArgs e)
+        { }
     }
 }
