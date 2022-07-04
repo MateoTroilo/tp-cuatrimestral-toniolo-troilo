@@ -3,164 +3,195 @@ create database ConsultorioDB
 use ConsultorioDB
 
 create table ObrasSociales(
-	IDObraSocial bigint not null primary key identity (1, 1),
+	IDObraSocial int not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
-)
-
-create table Planes(
-	IDPlan bigint not null primary key identity (1, 1),
-	IDObraSocial bigint not null foreign key references ObrasSociales(IDObraSocial),
-	Nombre varchar(100) not null,
-	PorcentajeCobertura int not null check(PorcentajeCobertura between 0 and 100)
+	Cobertura int null
 )
 
 create table Pacientes(
-	IDPaciente bigint not null primary key identity (1, 1),
+	IDPaciente int not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
 	Apellido varchar(100) not null,
 	DNI varchar(8) not null unique,
 	FechaNacimiento datetime not null,
-	Sexo char null,
+	Sexo varchar(20) null,
 	Email varchar(50) not null unique,
-	IDPlan bigint null foreign key references Planes(IDPlan),
+	IDObraSocial int null foreign key references ObrasSociales(IDObraSocial),
 )
 
 create table Especialidades(
-	IDEspecialidad bigint not null primary key identity (1, 1),
-	Nombre varchar(100) not null
+	IDEspecialidad int not null primary key identity (1, 1),
+	Nombre varchar(120) not null
 )
 
 create table Medicos(
-	IDMedico bigint not null primary key identity (1, 1),
+	IDMedico int not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
 	Apellido varchar(100) not null,
 	DNI varchar(8) not null unique,
 	FechaNacimiento datetime not null,
-	Sexo char null,
+	Sexo varchar(20) null,
 	Email varchar(50) not null unique,
-	IDEspecialidad bigint not null foreign key references Especialidades(IDEspecialidad)
+	HorarioInicio time not null,
+	HorarioFin time not null
+)
+
+Create Table Especialidades_x_Medico(
+    IDEspecialidad int not null foreign key references Especialidades(IDEspecialidad),
+    IDMedico int not null foreign key references Medicos(IDMedico),
+    primary key (IDEspecialidad, IDMedico)
 )
 
 create table Turnos(
-	IDTurno bigint not null primary key identity (1, 1),
+	IDTurno int not null primary key identity (1, 1),
 	Fecha datetime not null,
 	Estado varchar(50) null,
-	IDPaciente bigint not null foreign key references Pacientes(IDPaciente),
-	IDMedico bigint not null foreign key references Medicos(IDMedico),
+	IDPaciente int not null foreign key references Pacientes(IDPaciente),
+	IDMedico int not null foreign key references Medicos(IDMedico),
 	Observaciones text null,
 )
 
 create table Permisos(
-	IDPermiso bigint not null primary key identity (1, 1),
-	Nombre varchar(100) not null,
+	IDPermiso int not null primary key identity (1, 1),
+	Nombre varchar(100) not null
+)
+
+create table Dias(
+	IDDia int not null primary key identity (1, 1),
+	Nombre varchar(100) not null
+)
+
+Create Table Dias_x_Medico(
+    IDDia int not null foreign key references Dias(IDDia),
+    IDMedico int not null foreign key references Medicos(IDMedico),
+    primary key (IDDia, IDMedico)
 )
 
 create table Usuarios(
-	IDUsuario bigint not null primary key identity (1, 1),
+	IDUsuario int not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
 	Apellido varchar(100) not null,
 	DNI varchar(8) not null unique,
 	FechaNacimiento datetime not null,
-	Sexo char null,
+	Sexo varchar(20) null,
 	Email varchar(50) not null unique,
-	IDPermiso bigint not null foreign key references Permisos(IDPermiso)
+	IDPermiso int not null foreign key references Permisos(IDPermiso)
 )
 
 ----------------------
 
+insert into ObrasSociales (Nombre, Cobertura) values ('Sub-Ex', 86);
+insert into ObrasSociales (Nombre, Cobertura) values ('Subin', 37);
+insert into ObrasSociales (Nombre, Cobertura) values ('Sonsing', 95);
+insert into ObrasSociales (Nombre, Cobertura) values ('Cardguard', 86);
+insert into ObrasSociales (Nombre, Cobertura) values ('Treeflex', 46);
+insert into ObrasSociales (Nombre, Cobertura) values ('Bamity', 40);
+insert into ObrasSociales (Nombre, Cobertura) values ('Alpha', 80);
+insert into ObrasSociales (Nombre, Cobertura) values ('Veribet', 47);
+insert into ObrasSociales (Nombre, Cobertura) values ('Sonair', 32);
+insert into ObrasSociales (Nombre, Cobertura) values ('Opela', 70);
 
-insert into ObrasSociales (Nombre) values ('Pharmaceutical Associates, Inc.');
-insert into ObrasSociales (Nombre) values ('Allure Labs, Inc.');
-insert into ObrasSociales (Nombre) values ('Aidarex Pharmaceuticals LLC');
-insert into ObrasSociales (Nombre) values ('UDL Laboratories, Inc.');
-insert into ObrasSociales (Nombre) values ('ALK-Abello, Inc.');
-insert into ObrasSociales (Nombre) values ('McKesson Packaging Services a business unit of McKesson Corporation');
-insert into ObrasSociales (Nombre) values ('Imagenetix');
-insert into ObrasSociales (Nombre) values ('BluePoint Laboratories');
-insert into ObrasSociales (Nombre) values ('Ballay Pharmaceuticals, Inc');
-insert into ObrasSociales (Nombre) values ('Carilion Materials Management');
+----------------------
 
------------------
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Lotstring', 'Normant', 46194267, '23/07/2021', 'Female', 'gnormant0@1688.com', 3);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Cardguard', 'Boyack', 60872002, '27/06/2022', 'Male', 'cboyack1@sohu.com', 1);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Fintone', 'Bottomley', 42083187, '06/01/2022', 'Female', 'mbottomley2@dailymail.co.uk', 9);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Otcom', 'Loreit', 52071613, '10/05/2022', 'Female', 'dloreit3@discuz.net', 1);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Latlux', 'Bogart', 63198898, '05/01/2022', 'Female', 'pbogart4@instagram.com', 7);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Daltfresh', 'O'' Mahony', 97273986, '28/08/2021', 'Genderqueer', 'komahony5@yahoo.co.jp', 2);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Home Ing', 'Woodcroft', 57535582, '04/09/2021', 'Female', 'fwoodcroft6@epa.gov', 4);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Flowdesk', 'Frostdicke', 57345441, '20/06/2022', 'Male', 'efrostdicke7@a8.net', 7);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Konklab', 'Drohun', 11536964, '16/07/2021', 'Female', 'cdrohun8@vkontakte.ru', 2);
+insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values ('Duobam', 'Mulvey', 54034432, '17/10/2021', 'Female', 'wmulvey9@yolasite.com', 8);
 
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (9, 'Pain Reliever', 92);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (5, 'ESIKA', 88);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (4, 'Librium', 31);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (4, 'Ranitidine', 69);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (8, 'BC Arthritis', 87);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (1, 'Quik Wipes', 67);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (3, 'LIFT LUMIERE', 57);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (8, 'Red Kidney Beans', 42);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (3, 'METHYLERGONOVINE MALEATE', 58);
-insert into Planes (IDObraSocial, Nombre, PorcentajeCobertura) values (4, 'SYNTHROID', 54);
+----------------------
+
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Bigtax', 'Cradick', 47297626, '07/12/2021', 'Female', 'scradick0@tmall.com', 1);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Voltsillam', 'Abbey', 50397139, '11/08/2021', 'Male', 'jabbey1@xrea.com', 2);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Stronghold', 'Jakobssen', 44027814, '16/10/2021', 'Bigender', 'tjakobssen2@pcworld.com', 1);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Alpha', 'MacConnel', 11512795, '28/01/2022', 'Female', 'mmacconnel3@harvard.edu', 1);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Tresom', 'McGragh', 91569473, '12/10/2021', 'Male', 'cmcgragh4@wikia.com', 1);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Toughjoyfax', 'Svanetti', 61151141, '14/10/2021', 'Male', 'csvanetti5@google.fr', 1);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Bitchip', 'Baines', 15625737, '02/09/2021', 'Male', 'jbaines6@myspace.com', 2);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Span', 'Valerius', 94035024, '22/11/2021', 'Female', 'zvalerius7@lycos.com', 2);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Sub-Ex', 'Bayne', 42601729, '20/11/2021', 'Male', 'fbayne8@vinaora.com', 2);
+insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Latlux', 'Sandercock', 11731579, '10/08/2021', 'Agender', 'asandercock9@pbs.org', 2);
+
+----------------------
+
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Vagram', 'Nardi', 71416958, '03/04/2022', 'Male', 'fnardi0@yahoo.com', '19:18', '7:58');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Regrant', 'Lints', 15433965, '08/03/2022', 'Female', 'clints1@goodreads.com', '10:44', '6:41');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('It', 'Gudyer', 73490711, '12/12/2021', 'Female', 'wgudyer2@t-online.de', '21:08', '7:38');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Ruben', 60009209, '26/11/2021', 'Male', 'aruben3@so-net.ne.jp', '16:09', '17:04');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Fixflex', 'Clampin', 70161783, '29/08/2021', 'Male', 'fclampin4@multiply.com', '21:39', '14:35');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Askham', 73330243, '28/10/2021', 'Male', 'daskham5@ucoz.ru', '12:07', '3:51');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Veribet', 'Kittel', 17604322, '16/08/2021', 'Female', 'bkittel6@columbia.edu', '11:35', '8:27');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Zathin', 'Snepp', 82201194, '26/09/2021', 'Genderqueer', 'lsnepp7@mysql.com', '10:20', '14:27');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Y-Solowarm', 'Macias', 86370664, '13/06/2022', 'Male', 'dmacias8@51.la', '20:20', '8:02');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Keylex', 'Boolsen', 14719697, '13/11/2021', 'Male', 'mboolsen9@mapy.cz', '19:55', '13:32');
+
+----------------------
+
+insert into Especialidades (Nombre) values ('Construction Expeditor');
+insert into Especialidades (Nombre) values ('Electrician');
+insert into Especialidades (Nombre) values ('Construction Manager');
+insert into Especialidades (Nombre) values ('Architect');
+insert into Especialidades (Nombre) values ('Surveyor');
+insert into Especialidades (Nombre) values ('Supervisor');
+insert into Especialidades (Nombre) values ('Electrician');
+insert into Especialidades (Nombre) values ('Construction Foreman');
+insert into Especialidades (Nombre) values ('Subcontractor');
+
+----------------------
+
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (2, 5);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (5, 1);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (7, 3);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (7, 4);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (9, 3);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (4, 8);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (5, 2);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (3, 7);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (5, 7);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (7, 7);
+
+----------------------
+
+insert into Dias_x_Medico (IDDia, IDMedico) values (2, 5);
+insert into Dias_x_Medico (IDDia, IDMedico) values (4, 2);
+insert into Dias_x_Medico (IDDia, IDMedico) values (2, 1);
+insert into Dias_x_Medico (IDDia, IDMedico) values (3, 7);
+insert into Dias_x_Medico (IDDia, IDMedico) values (5, 3);
+insert into Dias_x_Medico (IDDia, IDMedico) values (1, 4);
+insert into Dias_x_Medico (IDDia, IDMedico) values (2, 8);
+insert into Dias_x_Medico (IDDia, IDMedico) values (4, 9);
+insert into Dias_x_Medico (IDDia, IDMedico) values (5, 6);
+insert into Dias_x_Medico (IDDia, IDMedico) values (3, 8);
+
+----------------------
+
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('10/30/2021', 'true', 8, 3, 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('11/25/2021', 'false', 9, 7, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('5/11/2022', 'false', 6, 5, 'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/9/2021', 'false', 5, 7, 'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('6/27/2022', 'true', 6, 5, 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/28/2021', 'false', 5, 7, 'Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('4/20/2022', 'false', 9, 3, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/7/2021', 'true', 9, 4, 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('10/1/2021', 'false', 6, 7, 'Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('3/15/2022', 'true', 1, 3, 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.');
+
+---------------------
+
+insert into Dias (Nombre) values ('Lunes');
+insert into Dias (Nombre) values ('Martes');
+insert into Dias (Nombre) values ('Miercoles');
+insert into Dias (Nombre) values ('Jueves');
+insert into Dias (Nombre) values ('Viernes');
+insert into Dias (Nombre) values ('Sabado');
 
 --------------------
 
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Sherri', 'Bater', 12501924, '2022-02-15', 'F', 'sbater0@slashdot.org', 6);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Violante', 'Renforth', 81043574, '2022-02-04', 'F', 'vrenforth1@4shared.com', 7);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Judah', 'Astley', 23818034, '2021-09-22', 'M', 'jastley2@people.com.cn', 7);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Hugh', 'Drescher', 69454463, '2021-06-21', 'M', 'hdrescher3@springer.com', 2);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Cindelyn', 'Snar', 89200396, '2021-07-21', 'F', 'csnar4@jimdo.com', 7);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Siana', 'Shivell', 44039695, '2022-03-11', 'F', 'sshivell5@amazonaws.com', 10);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Anjanette', 'Adame', 36375239, '2021-06-22', 'F', 'aadame6@slideshare.net', 1);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Karena', 'Marien', 54329488, '2022-03-17', 'F', 'kmarien7@mtv.com', 9);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Dewie', 'Martignoni', 46470238, '2022-03-01', 'M', 'dmartignoni8@newyorker.com', 9);
-insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPlan) values ('Karim', 'MacGarrity', 31857910, '2022-05-25', 'M', 'kmacgarrity9@wordpress.org', 10);
-
-------------------
-
-insert into Especialidades (Nombre) values ('Operator');
-insert into Especialidades (Nombre) values ('Financial Analyst');
-insert into Especialidades (Nombre) values ('Marketing Assistant');
-insert into Especialidades (Nombre) values ('Statistician IV');
-insert into Especialidades (Nombre) values ('Environmental Tech');
-insert into Especialidades (Nombre) values ('Help Desk Technician');
-insert into Especialidades (Nombre) values ('Web Designer II');
-insert into Especialidades (Nombre) values ('Systems Administrator IV');
-insert into Especialidades (Nombre) values ('Nurse');
-insert into Especialidades (Nombre) values ('Research Nurse');
-
--------------------
-
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Irita', 'Blow', 52316241, '2021-06-16', 'F', 'iblow0@printfriendly.com', 4);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Starr', 'Collyns', 82547589, '2022-03-16', 'F', 'scollyns1@weather.com', 4);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Clement', 'Taplin', 98297625, '2022-04-19', 'M', 'ctaplin2@yellowbook.com', 8);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Anastasie', 'Wafer', 48461783, '2021-08-08', 'F', 'awafer3@dailymail.co.uk', 6);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Culley', 'Toseland', 46392827, '2021-07-19', 'M', 'ctoseland4@soup.io', 2);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Margie', 'Putnam', 71449527, '2021-06-26', 'F', 'mputnam5@ft.com', 8);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Alie', 'Canario', 46268655, '2021-11-18', 'F', 'acanario6@foxnews.com', 6);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Lelia', 'Cool', 22726676, '2021-10-16', 'F', 'lcool7@narod.ru', 7);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Dame', 'Pallister', 77485418, '2021-11-01', 'M', 'dpallister8@usnews.com', 9);
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDEspecialidad) values ('Adolphus', 'Hare', 40772861, '2022-03-28', 'M', 'ahare9@plala.or.jp', 9);
-
-------------------
-
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('9/29/2021', 'false', 7, 3, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('10/10/2021', 'false', 4, 2, 'Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('3/18/2022', 'false', 10, 2, 'Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('9/18/2021', 'true', 9, 9, 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('6/10/2022', 'true', 9, 7, 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('9/4/2021', 'true', 2, 8, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('8/31/2021', 'false', 4, 4, 'Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/16/2021', 'true', 3, 3, 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('1/22/2022', 'true', 1, 2, 'Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('12/13/2021', 'true', 5, 5, 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.');
-
--------------------
-
-insert into Permisos (Nombre) values ('Administrador');
-insert into Permisos (Nombre) values ('Recepcionista');
+insert into Permisos (Nombre) values ('Usuario');
+insert into Permisos (Nombre) values ('Admin');
 insert into Permisos (Nombre) values ('Medico');
-
-------------------
-
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Madge', 'Spracklin', 53464188, '2021-09-28', 'F', 'mspracklin0@example.com', 1);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Wolfy', 'Medlicott', 82828974, '2021-10-19', 'M', 'wmedlicott1@archive.org', 1);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Issie', 'Adamolli', 16739761, '2021-12-04', 'F', 'iadamolli2@utexas.edu', 2);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Wells', 'Callway', 35927076, '2022-01-15', 'M', 'wcallway3@exblog.jp', 2);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Webster', 'Bentham', 29921377, '2021-11-19', 'M', 'wbentham4@columbia.edu', 3);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Evy', 'D''Oyley', 26810057, '2021-10-17', 'F', 'edoyley5@army.mil', 2);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Hieronymus', 'Gaskamp', 79260581, '2021-10-23', 'M', 'hgaskamp6@yale.edu', 2);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Benedicto', 'Trundler', 57542613, '2022-02-14', 'M', 'btrundler7@forbes.com', 2);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Madlen', 'Matuszyk', 63225913, '2022-01-22', 'F', 'mmatuszyk8@dell.com', 2);
-insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPermiso) values ('Shina', 'Clineck', 35247751, '2021-12-18', 'F', 'sclineck9@oakley.com', 3);
-
