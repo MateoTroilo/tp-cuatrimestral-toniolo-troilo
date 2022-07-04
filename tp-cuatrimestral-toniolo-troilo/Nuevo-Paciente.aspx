@@ -44,9 +44,9 @@
             </div>
 
             <div class="row mb-3">
-                <label for="CalendarFechaNac" class="col-sm-2 col-form-label">Fecha de nacimiento</label>
+                <label for="FechaNacimiento" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                 <div class="col-sm-10">
-                    <asp:Calendar ID="CalendarDate" runat="server" type="date"></asp:Calendar>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="FechaNacimineto" type="Date" />
                 </div>
             </div>
 

@@ -43,9 +43,9 @@
             </div>
 
             <div class="row mb-3">
-                <label for="CalendarFechaNac" class="col-sm-2 col-form-label">Fecha de nacimiento</label>
+                <label for="Fecha" class="col-sm-2 col-form-label">Fecha</label>
                 <div class="col-sm-10">
-                    <asp:Calendar ID="CalendarDate" runat="server" type="date"></asp:Calendar>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="Fecha" type="Date" />
                 </div>
             </div>
 
@@ -100,6 +100,21 @@
                 </div>
                     </div>
             </div>
+
+            <div class="row mb-3">
+                <label for="HorarioInicio" class="col-sm-2 col-form-label">Horario Inicio</label>
+                <div class="col-sm-10">
+                    <asp:TextBox runat="server" CssClass="form-control" ID="HorarioInicio" type="Time" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="HorarioFin" class="col-sm-2 col-form-label">Horario Fin</label>
+                <div class="col-sm-10">
+                    <asp:TextBox runat="server" CssClass="form-control" ID="HorarioFin" type="Time" />
+                </div>
+            </div>
+
             <asp:Button Text="Guardar" CssClass="btn btn-primary" ID="btnRegistrar" OnClick="btnRegistrar_Click" runat="server" />
         </div>
         <div class="col-2"></div>

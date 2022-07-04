@@ -21,8 +21,8 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             try
             {
-                paciente = new Paciente(txtNombre.Text, txtApellido.Text, CalendarDate.SelectedDate, int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
-                negocio.Agregar(paciente);
+                //paciente = new Paciente(txtNombre.Text, txtApellido.Text, FechaNacimiento.SelectedDate, int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
+                //negocio.Agregar(paciente);
             }
             catch (Exception ex)
             {

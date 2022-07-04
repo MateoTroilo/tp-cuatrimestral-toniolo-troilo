@@ -78,13 +78,13 @@ namespace tp_cuatrimestral_toniolo_troilo
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// CalendarDate control.
+        /// Fecha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarDate;
+        protected global::System.Web.UI.WebControls.TextBox Fecha;
 
         /// <summary>
         /// txtObraSocial control.
@@ -121,6 +121,24 @@ namespace tp_cuatrimestral_toniolo_troilo
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEspecialidades;
+
+        /// <summary>
+        /// HorarioInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox HorarioInicio;
+
+        /// <summary>
+        /// HorarioFin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox HorarioFin;
 
         /// <summary>
         /// btnRegistrar control.
