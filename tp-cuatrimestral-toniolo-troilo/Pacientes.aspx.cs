@@ -29,6 +29,26 @@ namespace tp_cuatrimestral_toniolo_troilo
         {
             Response.Redirect("Nuevo-Paciente.aspx", false);
         }
+
+        protected void EditBtnClick(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            int rowindex = gvr.RowIndex;
+
+            string msg = "<script>alert(" + rowindex + ");</script>";
+            Response.Write(msg);
+        }
+
+        protected void DeleteBtnClick(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            int rowindex = gvr.RowIndex;
+
+            string msg = "<script>alert(" + rowindex + ");</script>";
+            Response.Write(msg);
+        }
     }
 
    

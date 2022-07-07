@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Pacientes.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Pacientes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Pacientes.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Pacientes" EnableEventValidation="false" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -10,9 +11,17 @@
 
         <columns>
 
-            <asp:CommandField ShowSelectButton="true" SelectText="Editar" HeaderText="Editar"/>
-            <asp:CommandField ShowSelectButton="true" SelectText="Modificar" HeaderText="Modificar" />
-            <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Eliminar" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button runat="server" ButtonType="Button" Text="Edit" OnClick="EditBtnClick" />
+                </ItemTemplate>
+            </asp:TemplateField>
+
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button runat="server" ButtonType="Button" Text="Delete" OnClick="DeleteBtnClick" />
+                </ItemTemplate>
+            </asp:TemplateField>
 
         </columns>
 

@@ -12,12 +12,12 @@ namespace tp_cuatrimestral_toniolo_troilo
             AccesoDB db = new AccesoDB();
             try
             {
-                db.setQuery("insert into Pacientes(Nombre, Apellido, DNI, FechaNacimiento, Email, IDPlan) values(@Nombre, @Apellido, @DNI, @FechaNacimiento, @Email, @IDPlan)");
+                db.setQuery("insert into Pacientes (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDObraSocial) values (@Nombre, @Apellido, @DNI, @FechaNacimiento, @Sexo, @Email, @IDPlan)");
                 db.setParametros("@Nombre", paciente.Nombre);
                 db.setParametros("@Apellido", paciente.Apellido);
                 db.setParametros("@DNI", paciente.DNI);
                 db.setParametros("@FechaNacimiento", paciente.FechaNacimiento);
-                //db.setParametros("@Sexo", paciente.Sexo);
+                db.setParametros("@Sexo", paciente.Sexo);
                 db.setParametros("@Email", paciente.Email);
                 db.setParametros("@IDPlan", paciente.ObraSocial);
 
@@ -44,7 +44,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                 db.setParametros("@Apellido", paciente.Apellido);
                 db.setParametros("@DNI", paciente.DNI);
                 db.setParametros("@FechaNacimiento", paciente.FechaNacimiento);
-                //db.setParametros("@Sexo", paciente.Sexo);
+                db.setParametros("@Sexo", paciente.Sexo);
                 db.setParametros("@Email", paciente.Email);
                 db.setParametros("@IDPlan", paciente.ObraSocial);
 
@@ -69,7 +69,7 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             try
             {
-                datos.setQuery("select cast(IDPaciente as int) as IDPaciente, Nombre, cast(Apellido as varchar) as Apellido, cast(DNI as int) as DNI, cast(FechaNacimiento as DateTime) as FechaNacimiento, cast(Email as varchar) as Email from Pacientes");
+                datos.setQuery("select IDPaciente, P.Nombre, Apellido, cast(DNI as int) as DNI, FechaNacimiento, Sexo, Email, O.Nombre as 'Obra Social' from Pacientes as P inner join ObrasSociales as O on O.IDObraSocial = P.IDObraSocial");
                 datos.read();
 
                 while (datos.Reader.Read())
@@ -79,8 +79,10 @@ namespace tp_cuatrimestral_toniolo_troilo
                     aux.Nombre = (string)datos.Reader["Nombre"];
                     aux.Apellido = (string)datos.Reader["Apellido"];
                     aux.DNI = (int)datos.Reader["DNI"];
+                    aux.Sexo = (string)datos.Reader["Sexo"];
                     aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
                     aux.Email = (string)datos.Reader["Email"];
+                    aux.ObraSocial = (string)datos.Reader["Obra Social"];
 
                     lista.Add(aux);
                 }
@@ -95,6 +97,28 @@ namespace tp_cuatrimestral_toniolo_troilo
             finally
             {
                 datos.closeConnection();
+            }
+        }
+
+        public void Eliminar(int ID)
+        {
+            AccesoDB db = new AccesoDB();
+
+            try
+            {
+                db.setQuery("delete from pacientes where IDPaciente = @IDPaciente");
+                db.setParametros("@IDPaciente", ID);
+
+                db.run();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                db.closeConnection();
             }
         }
 

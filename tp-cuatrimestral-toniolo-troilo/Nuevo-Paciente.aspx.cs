@@ -16,13 +16,26 @@ namespace tp_cuatrimestral_toniolo_troilo
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            string sex = null;
             Paciente paciente;
             PacienteNegocio negocio = new PacienteNegocio();
+            if (femenino.Checked)
+            {
+                sex = "Femenino";
+            }
+            else if(masculino.Checked)
+            {
+                sex = "Masculino";
+            }
+            else if(otro.Checked)
+            {
+                sex = "Otro";
+            }
 
             try
             {
-                //paciente = new Paciente(txtNombre.Text, txtApellido.Text, FechaNacimiento.SelectedDate, int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
-                //negocio.Agregar(paciente);
+                paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
+                negocio.Agregar(paciente);
             }
             catch (Exception ex)
             {
