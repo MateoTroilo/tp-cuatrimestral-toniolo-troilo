@@ -19,7 +19,7 @@
 
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button runat="server" ButtonType="Button" Text="Delete" OnClick="DeleteBtnClick" />
+                    <asp:Button runat="server" ButtonType="Button" Text="Delete" OnClientClick="return confirm('Eliminar paciente?');" onclick="DeleteBtnClick" />
                 </ItemTemplate>
             </asp:TemplateField>
 
