@@ -11,6 +11,22 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes estar logueado para ingresar a esta pantalla.");
+                Response.Redirect("error.aspx", false);
+                return;
+            }
+
+            if (((Usuarios)Session["usuario"]).TipoUsuario == TipoUsuario.MEDICO)
+            {
+                Session.Add("error", "No tienes permisos para ingresar a esta pantalla.");
+                Response.Redirect("error.aspx", false);
+                return;
+            }
+
+
             if (Request.QueryString["ID"] != null)
             { 
                 int ID = Int32.Parse(Request.QueryString["ID"]);
