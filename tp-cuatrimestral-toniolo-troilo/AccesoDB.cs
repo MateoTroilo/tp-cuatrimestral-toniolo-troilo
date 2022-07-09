@@ -20,7 +20,7 @@ namespace tp_cuatrimestral_toniolo_troilo
 
         public AccesoDB()
         {
-            connection = new SqlConnection("server=.\\SQLEXPRESS; database=ConsultorioDB; integrated security=true");
+            connection = new SqlConnection("server=.\\; database=ConsultorioDB1; integrated security=true");
             command = new SqlCommand();
         }
         public void setQuery(string query)

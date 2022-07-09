@@ -7,14 +7,17 @@ using System.Web.UI.WebControls;
 
 namespace tp_cuatrimestral_toniolo_troilo
 {
-    public partial class Site1 : System.Web.UI.MasterPage
+    public partial class Formulario_web16 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null)
-            {
-                
-            }
+
+        }
+
+        protected void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Session.Remove("usuario");
+            Response.Redirect("Default.aspx", false);
         }
     }
 }

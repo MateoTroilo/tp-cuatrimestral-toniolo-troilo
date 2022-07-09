@@ -29,8 +29,8 @@ namespace tp_cuatrimestral_toniolo_troilo
                 }
                 else
                 {
-                    Session.Add("error", "usero o pass incorrectos");
-                    Response.Redirect("LoginError.aspx", false);
+                    Session.Add("error", "user o pass incorrectos");
+                    Response.Redirect("Error.aspx", false);
                 }
                 
             }
