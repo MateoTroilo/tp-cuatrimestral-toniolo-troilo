@@ -21,7 +21,7 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             try
             {
-                usuario = new Usuarios(txtEmail.Text, txtPassword.Text, 1);
+                usuario = new Usuarios(txtEmail.Text, txtPassword.Text, TipoUsuario.ADMIN);
                 if (negocio.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);

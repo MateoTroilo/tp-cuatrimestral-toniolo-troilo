@@ -24,7 +24,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                 if (x)
                 {
                     usuario.Id = (int)db.Reader["IDUsuario"];
-                    usuario.TipoUsuario = (int)db.Reader["IDPermiso"];
+                    usuario.TipoUsuario = (TipoUsuario)db.Reader["IDPermiso"];
                     return true;
                 }
                 else 

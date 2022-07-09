@@ -11,8 +11,9 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["error"]!= null)
+            if (Session["error"] != null)
                 lblMensaje.Text = Session["error"].ToString();
+            else lblMensaje.Text = "";
         }
     }
 }
