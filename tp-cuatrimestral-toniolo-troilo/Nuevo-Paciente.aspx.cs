@@ -11,7 +11,44 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["ID"] != null)
+            { 
+                int ID = Int32.Parse(Request.QueryString["ID"]);
 
+                PacienteNegocio negocio = new PacienteNegocio();
+                Paciente paciente = negocio.Buscar(ID);
+
+                txtNombre.Text = paciente.Nombre;
+                txtApellido.Text = paciente.Apellido;
+                txtDNI.Text = paciente.DNI.ToString();
+                txtEmail.Text = paciente.Email;
+                txtObraSocial.Text = paciente.ObraSocial;
+                //       dD/mM/aaaa
+
+                string aux = paciente.FechaNacimiento.ToString().Substring(paciente.FechaNacimiento.ToString().LastIndexOf("/")).TrimStart('/');
+                string aaaa = aux.Substring(0, aux.LastIndexOf(" ") + 1).TrimEnd(' ');
+
+                string aux1 = paciente.FechaNacimiento.ToString().Substring(0, paciente.FechaNacimiento.ToString().LastIndexOf("/") + 1);
+                string mm = aux1.Substring(aux1.IndexOf("/")).TrimEnd('/').TrimStart('/');
+                if (mm.Length == 1) { mm = "0" + mm; }
+
+                string dd = paciente.FechaNacimiento.ToString().Substring(0, paciente.FechaNacimiento.ToString().IndexOf("/") + 1).TrimEnd('/'); 
+                if(dd.Length == 1) { dd = "0" + dd; }
+
+                FechaNacimineto.Text = aaaa + '-' + mm + '-' + dd;
+
+                switch (paciente.Sexo)
+                {
+                    case "Female":
+                        femenino.Checked = true;
+                        break;
+                    case "Male":
+                        masculino.Checked = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -23,11 +60,11 @@ namespace tp_cuatrimestral_toniolo_troilo
             {
                 sex = "Femenino";
             }
-            else if(masculino.Checked)
+            else if (masculino.Checked)
             {
                 sex = "Masculino";
             }
-            else if(otro.Checked)
+            else if (otro.Checked)
             {
                 sex = "Otro";
             }

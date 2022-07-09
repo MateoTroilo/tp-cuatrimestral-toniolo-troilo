@@ -20,24 +20,18 @@ namespace tp_cuatrimestral_toniolo_troilo
             Response.Redirect("Nuevo-Paciente.aspx", false);
         }
 
-        protected void btnModificar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Nuevo-Paciente.aspx", false);
-        }
-
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Nuevo-Paciente.aspx", false);
-        }
-
         protected void EditBtnClick(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             int rowindex = gvr.RowIndex;
 
-            string msg = "<script>alert(" + rowindex + ");</script>";
-            Response.Write(msg);
+            dgvPacientes.SelectRow(rowindex);
+            GridViewRow row = dgvPacientes.SelectedRow;
+
+            int ID = Int32.Parse(row.Cells[3].Text);
+
+            Response.Redirect("Nuevo-Paciente.aspx?ID=" + ID, false);
         }
 
         protected void DeleteBtnClick(object sender, EventArgs e)
@@ -46,8 +40,19 @@ namespace tp_cuatrimestral_toniolo_troilo
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             int rowindex = gvr.RowIndex;
 
-            string msg = "<script>alert(" + rowindex + ");</script>";
-            Response.Write(msg);
+            dgvPacientes.SelectRow(rowindex);
+            GridViewRow row = dgvPacientes.SelectedRow;
+
+            int ID = Int32.Parse(row.Cells[3].Text);
+
+            PacienteNegocio negocio = new PacienteNegocio();
+            negocio.Eliminar(ID);
+
+            Response.Redirect(Request.RawUrl);
+            //string msg = "<script>alert(" + row.Cells[3].Text + ");</script>";
+            //Response.Write(msg);
+
+
         }
     }
 

@@ -100,6 +100,44 @@ namespace tp_cuatrimestral_toniolo_troilo
             }
         }
 
+        public Paciente Buscar(int ID)
+        {
+            Paciente aux = new Paciente();
+            AccesoDB datos = new AccesoDB();
+
+
+            try
+            {
+                datos.setQuery("select IDPaciente, P.Nombre, Apellido, cast(DNI as int) as DNI, FechaNacimiento, Sexo, Email, O.Nombre as 'Obra Social' from Pacientes as P inner join ObrasSociales as O on O.IDObraSocial = P.IDObraSocial where IDPaciente = @ID");
+                datos.setParametros("@ID", ID);
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    aux.Id = (int)datos.Reader["IDPaciente"];
+                    aux.Nombre = (string)datos.Reader["Nombre"];
+                    aux.Apellido = (string)datos.Reader["Apellido"];
+                    aux.DNI = (int)datos.Reader["DNI"];
+                    aux.Sexo = (string)datos.Reader["Sexo"];
+                    aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
+                    aux.Email = (string)datos.Reader["Email"];
+                    aux.ObraSocial = (string)datos.Reader["Obra Social"];
+
+                }
+
+
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+        }
+
         public void Eliminar(int ID)
         {
             AccesoDB db = new AccesoDB();
