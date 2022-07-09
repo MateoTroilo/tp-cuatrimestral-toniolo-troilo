@@ -1,6 +1,6 @@
-create database ConsultorioDB
+create database ConsultorioDB1
 
-use ConsultorioDB
+use ConsultorioDB1
 
 create table ObrasSociales(
 	IDObraSocial int not null primary key identity (1, 1),
@@ -80,6 +80,21 @@ create table Usuarios(
 
 ----------------------
 
+insert into Dias (Nombre) values ('Lunes');
+insert into Dias (Nombre) values ('Martes');
+insert into Dias (Nombre) values ('Miercoles');
+insert into Dias (Nombre) values ('Jueves');
+insert into Dias (Nombre) values ('Viernes');
+insert into Dias (Nombre) values ('Sabado');
+
+--------------------
+
+insert into Permisos (Nombre) values ('Usuario');
+insert into Permisos (Nombre) values ('Admin');
+insert into Permisos (Nombre) values ('Medico');
+
+--------------------
+
 insert into ObrasSociales (Nombre, Cobertura) values ('Sub-Ex', 86);
 insert into ObrasSociales (Nombre, Cobertura) values ('Subin', 37);
 insert into ObrasSociales (Nombre, Cobertura) values ('Sonsing', 95);
@@ -123,7 +138,7 @@ insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, Horari
 insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Regrant', 'Lints', 15433965, '08/03/2022', 'Female', 'clints1@goodreads.com', '10:44', '6:41');
 insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('It', 'Gudyer', 73490711, '01/12/2021', 'Female', 'wgudyer2@t-online.de', '21:08', '7:38');
 insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Ruben', 60009209, '01/11/2021', 'Male', 'aruben3@so-net.ne.jp', '16:09', '17:04');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Fixflex', 'Clampin', 70161783, '29/08/2021', 'Male', 'fclampin4@multiply.com', '21:39', '14:35');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Fixflex', 'Clampin', 70161783, '12/08/2021', 'Male', 'fclampin4@multiply.com', '21:39', '14:35');
 insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Askham', 73330243, '01/10/2021', 'Male', 'daskham5@ucoz.ru', '12:07', '3:51');
 insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Veribet', 'Kittel', 17604322, '01/08/2021', 'Female', 'bkittel6@columbia.edu', '11:35', '8:27');
 insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Zathin', 'Snepp', 82201194, '01/09/2021', 'Genderqueer', 'lsnepp7@mysql.com', '10:20', '14:27');
@@ -144,8 +159,8 @@ insert into Especialidades (Nombre) values ('Subcontractor');
 
 ----------------------
 
-insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (2, 5);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (5, 1);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (3, 1);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (7, 3);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (7, 4);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (9, 3);
@@ -157,8 +172,8 @@ insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (7, 7);
 
 ----------------------
 
-insert into Dias_x_Medico (IDDia, IDMedico) values (2, 5);
 insert into Dias_x_Medico (IDDia, IDMedico) values (4, 2);
+insert into Dias_x_Medico (IDDia, IDMedico) values (5, 2);
 insert into Dias_x_Medico (IDDia, IDMedico) values (2, 1);
 insert into Dias_x_Medico (IDDia, IDMedico) values (3, 7);
 insert into Dias_x_Medico (IDDia, IDMedico) values (5, 3);
@@ -172,9 +187,9 @@ insert into Dias_x_Medico (IDDia, IDMedico) values (3, 8);
 
 insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('10/30/2021', 'true', 8, 3, 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh.');
 insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('11/25/2021', 'false', 9, 7, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('5/11/2022', 'false', 6, 5, 'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('5/11/2022', 'false', 5, 7, 'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum.');
 insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/9/2021', 'false', 5, 7, 'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('6/27/2022', 'true', 6, 5, 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('6/27/2022', 'true', 9, 3, 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus.');
 insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/28/2021', 'false', 5, 7, 'Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.');
 insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('4/20/2022', 'false', 9, 3, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.');
 insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/7/2021', 'true', 9, 4, 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus.');
@@ -183,15 +198,4 @@ insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values (
 
 ---------------------
 
-insert into Dias (Nombre) values ('Lunes');
-insert into Dias (Nombre) values ('Martes');
-insert into Dias (Nombre) values ('Miercoles');
-insert into Dias (Nombre) values ('Jueves');
-insert into Dias (Nombre) values ('Viernes');
-insert into Dias (Nombre) values ('Sabado');
 
---------------------
-
-insert into Permisos (Nombre) values ('Usuario');
-insert into Permisos (Nombre) values ('Admin');
-insert into Permisos (Nombre) values ('Medico');
