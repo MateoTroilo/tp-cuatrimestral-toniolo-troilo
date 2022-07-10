@@ -87,6 +87,7 @@
     <Content Include="Nueva-Especialidad.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EspecialidadNegocio.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

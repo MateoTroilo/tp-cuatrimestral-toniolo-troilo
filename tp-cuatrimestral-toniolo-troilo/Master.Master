@@ -23,9 +23,13 @@
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Medico-Turno.aspx">Turnos</a>
                         </li>
+                        <% if (((tp_cuatrimestral_toniolo_troilo.Usuarios)Session["usuario"]).TipoUsuario != tp_cuatrimestral_toniolo_troilo.TipoUsuario.ADMIN)
+                            { %>
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Pacientes.aspx">Pacientes</a>
                         </li>
+                        <% } %>
+
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Medico-Turno.aspx">Médicos</a>
                         </li>

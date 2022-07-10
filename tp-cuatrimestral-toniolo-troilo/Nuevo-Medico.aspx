@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Nuevo-Medico.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Nuevo_Medico" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <div class="row">
+    <div class="row">
         <div class="col-2"></div>
         <div class="col">
             <div class="row mb-3">
@@ -61,44 +62,49 @@
                 <div class="col-sm-10">
                     <asp:DropDownList ID="ltsEspecialidades"
                         AutoPostBack="True"
-                        runat="server">
-                        <asp:ListItem Selected="True" Value="Clinico"> Clinico </asp:ListItem>
-                        <asp:ListItem Value="Clinico"> Clinico </asp:ListItem>
-                        <asp:ListItem Value="Clinico"> Clinico </asp:ListItem>
+                        runat="server"
+                        CssClass="btn btn-outline-dark dropdown-togglez">
                     </asp:DropDownList>
                     <asp:Button Text="+" CssClass="btn btn-primary" ID="SumarEspecialidad" OnClick="btnSumarEsp_Click" runat="server" />
                 </div>
-                <asp:Label Text="" ID="lblEspecialidades" runat="server" />
+                <asp:Repeater runat="server" id="repEspecialidades">
+                    <ItemTemplate>
+                            <div>
+                                <asp:Label Text='<%#Eval("Nombre") %>' ID="lblEspecialidad" runat="server" />
+                                <asp:Button Text="x" CssClass="btn btn-secondary" ID="RestarEspecialidad" OnClick="RestarEspecialidad_Click" runat="server" CommandArgument='<%#Eval("ID") %>' CommandName="EspecialidadID"/>
+                            </div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
 
             <div class="row mb-3">
                 <label for="txtDias" class="col-sm-2 col-form-label">Dias</label>
                 <div class="col-sm-10">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Lunes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Martes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">Miercoles</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Jueves</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Viernes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">Sabados</label>
-                </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox1">Lunes</label>
                     </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                        <label class="form-check-label" for="inlineCheckbox2">Martes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3">Miercoles</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox1">Jueves</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
+                        <label class="form-check-label" for="inlineCheckbox2">Viernes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3">Sabados</label>
+                    </div>
+                </div>
             </div>
 
             <div class="row mb-3">
