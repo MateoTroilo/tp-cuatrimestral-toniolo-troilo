@@ -40,7 +40,8 @@ namespace tp_cuatrimestral_toniolo_troilo
             MedicoNegocio negocio = new MedicoNegocio();
 
             List<Especialidad> medicoEspecialidades = new List<Especialidad>();
-            medicoEspecialidades = (List<Especialidad>)Session["listaEspecialidades"];
+            medicoEspecialidades = (List<Especialidad>)Session["medicoEspecialidades"];
+
 
             string sex = null;
             List<Dias> listaDias = new List<Dias>();
@@ -63,27 +64,31 @@ namespace tp_cuatrimestral_toniolo_troilo
             {
                 listaDias.Add(Dias.Lunes);
             }
-            else if (inlineCheckbox2.Checked)
+            if (inlineCheckbox2.Checked)
             {
                 listaDias.Add(Dias.Martes);
             }
-            else if (inlineCheckbox3.Checked)
+            if (inlineCheckbox3.Checked)
             {
                 listaDias.Add(Dias.Miercoles);
             }
-            else if (inlineCheckbox4.Checked)
+            if (inlineCheckbox4.Checked)
             {
                 listaDias.Add(Dias.Jueves);
             }
-            else if (inlineCheckbox5.Checked)
+            if (inlineCheckbox5.Checked)
             {
                 listaDias.Add(Dias.Viernes);
             }
-            else if (inlineCheckbox6.Checked)
+            if (inlineCheckbox6.Checked)
             {
                 listaDias.Add(Dias.Sabado);
             }
 
+            //for (int i = 0; i < listaDias.Count; i++)
+            //{
+            //    Response.Write(@"<script language='javascript'>alert('" + listaDias[i] + "')</script>");
+            //}
 
             try
             {
@@ -92,13 +97,17 @@ namespace tp_cuatrimestral_toniolo_troilo
 
                 medico = new Medico(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(Fecha.Text), int.Parse(txtDNI.Text), txtEmail.Text, HoraInicio, HoraFin, listaDias, medicoEspecialidades);
                 negocio.Agregar(medico);
-        }
+            }
             catch (Exception ex)
             {
                 throw ex;
 
             }
-}
+
+            Response.Write(@"<script language='javascript'>alert(' Agregado Correctamente ')</script>");
+
+            Response.Redirect("Nuevo-Medico.aspx", false);
+        }
 
         protected void btnSumarEsp_Click(object sender, EventArgs e)
         {

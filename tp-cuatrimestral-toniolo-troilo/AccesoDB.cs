@@ -45,6 +45,34 @@ namespace tp_cuatrimestral_toniolo_troilo
 
         }
 
+        public void Open()
+        {
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public void rerun()
+        {
+            command.Connection = connection;
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public void run()
         {
             command.Connection = connection;

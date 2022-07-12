@@ -9,35 +9,35 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         public void Agregar(Medico medico)
         {
-            //AccesoDB db = new AccesoDB();
-
-
+            AccesoDB db = new AccesoDB();
             int ID;
-            //try
-            //{
-            //    //Datos Personales
-            //    db.setQuery("insert into Medicos(Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values (@Nombre, @Apellido, @DNI, @FechaNacimiento, @Sexo, @Email, @HorarioInicio, @HorarioFin)");
-            //    db.setParametros("@Nombre", medico.Nombre);
-            //    db.setParametros("@Apellido", medico.Apellido);
-            //    db.setParametros("@DNI", medico.DNI);
-            //    db.setParametros("@FechaNacimiento", medico.FechaNacimiento);
-            //    db.setParametros("@Sexo", medico.Sexo);
-            //    db.setParametros("@Email", medico.Email);
-            //    db.setParametros("@HorarioInicio", medico.Horario.Inicio);
-            //    db.setParametros("@HorarioFin", medico.Horario.Fin);
 
-            //    db.run();
+            //Datos Personales
+            try
+            {
+                
+                db.setQuery("insert into Medicos(Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values (@Nombre, @Apellido, @DNI, @FechaNacimiento, @Sexo, @Email, @HorarioInicio, @HorarioFin)");
+                db.setParametros("@Nombre", medico.Nombre);
+                db.setParametros("@Apellido", medico.Apellido);
+                db.setParametros("@DNI", medico.DNI);
+                db.setParametros("@FechaNacimiento", medico.FechaNacimiento);
+                db.setParametros("@Sexo", medico.Sexo);
+                db.setParametros("@Email", medico.Email);
+                db.setParametros("@HorarioInicio", medico.Horario.Inicio);
+                db.setParametros("@HorarioFin", medico.Horario.Fin);
 
-            //}
-            //catch (Exception ex)
-            //{
+                db.run();
 
-            //    throw ex;
-            //}
-            //finally
-            //{
-            //    db.closeConnection();
-            //}
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                db.closeConnection();
+            }
 
             ///////Get ID del medico
 
@@ -66,16 +66,18 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             ////////Guardar Especialidades
             AccesoDB db2 = new AccesoDB();
-
+            db2.Open();
+            db2.setParametros("@IDMedico", ID);
             try
             {
                 for (int i = 0; i < medico.Especialidades.Count; i++)
                 {
-                    db2.setQuery("insert into Especialidades_x_Medico(IDMedico, IDEspecialidad) values (@IDMedico, @IDEspecialidad)");
-                    db2.setParametros("@IDMedico", ID);
-                    db2.setParametros("@IDEspecialidad", medico.Especialidades[i].ID);
-                    db2.run();
+                    db2.setQuery("insert into Especialidades_x_Medico(IDMedico, IDEspecialidad) values (@IDMedico, @IDEspecialidad" + i+ ")");
+                    db2.setParametros(("@IDEspecialidad" + i), medico.Especialidades[i].ID);
+                    db2.rerun();
+                    
                 }
+
             }
             catch (Exception ex)
             {
@@ -83,19 +85,22 @@ namespace tp_cuatrimestral_toniolo_troilo
                 throw ex;
             }
 
-            finally { db2.closeConnection(); }
+            finally 
+            { 
+                db2.closeConnection(); 
+            }
 
             ////////Guardar Dias
             AccesoDB db3 = new AccesoDB();
-
+            db3.Open();
+            db3.setParametros("@IDMedico", ID);
             try
             {
                 for (int i = 0; i < medico.Horario.Dias.Count; i++)
                 {
-                    db3.setQuery("insert into Dias_x_Medico(IDDia, IDMedico) values(@IDDia, @IDMedico)");
-                    db3.setParametros("@IDDia", medico.Especialidades[i].ID);
-                    db3.setParametros("@IDMedico", ID);
-                    db3.run();
+                    db3.setQuery("insert into Dias_x_Medico(IDDia, IDMedico) values(@IDDia" + i + ", @IDMedico)");
+                    db3.setParametros(("@IDDia" + i), ((int)medico.Horario.Dias[i] + 1).ToString());
+                    db3.rerun();
                 }
             }
             catch (Exception ex)
@@ -103,7 +108,10 @@ namespace tp_cuatrimestral_toniolo_troilo
 
                 throw ex;
             }
-            finally { db3.closeConnection(); }
+            finally 
+            { 
+                db3.closeConnection(); 
+            }
         }
 
         public void Modificar(Medico medico)
