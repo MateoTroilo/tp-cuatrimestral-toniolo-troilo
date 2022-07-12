@@ -1,6 +1,6 @@
-create database ConsultorioDB1
+create database ConsultorioDB
 
-use ConsultorioDB1
+use ConsultorioDB
 
 create table ObrasSociales(
 	IDObraSocial int not null primary key identity (1, 1),
@@ -32,8 +32,8 @@ create table Medicos(
 	FechaNacimiento datetime not null,
 	Sexo varchar(20) null,
 	Email varchar(50) not null unique,
-	HorarioInicio time not null,
-	HorarioFin time not null
+	HorarioInicio int not null,
+	HorarioFin int not null
 )
 
 Create Table Especialidades_x_Medico(
@@ -134,16 +134,16 @@ insert into Usuarios (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, IDPer
 
 ----------------------
 
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Vagram', 'Nardi', 71416958, '03/04/2022', 'Male', 'fnardi0@yahoo.com', '19:18', '7:58');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Regrant', 'Lints', 15433965, '08/03/2022', 'Female', 'clints1@goodreads.com', '10:44', '6:41');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('It', 'Gudyer', 73490711, '01/12/2021', 'Female', 'wgudyer2@t-online.de', '21:08', '7:38');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Ruben', 60009209, '01/11/2021', 'Male', 'aruben3@so-net.ne.jp', '16:09', '17:04');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Fixflex', 'Clampin', 70161783, '12/08/2021', 'Male', 'fclampin4@multiply.com', '21:39', '14:35');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Askham', 73330243, '01/10/2021', 'Male', 'daskham5@ucoz.ru', '12:07', '3:51');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Veribet', 'Kittel', 17604322, '01/08/2021', 'Female', 'bkittel6@columbia.edu', '11:35', '8:27');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Zathin', 'Snepp', 82201194, '01/09/2021', 'Genderqueer', 'lsnepp7@mysql.com', '10:20', '14:27');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Y-Solowarm', 'Macias', 86370664, '01/06/2022', 'Male', 'dmacias8@51.la', '20:20', '8:02');
-insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Keylex', 'Boolsen', 14719697, '01/11/2021', 'Male', 'mboolsen9@mapy.cz', '19:55', '13:32');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Vagram', 'Nardi', 71416958, '03/04/2022', 'Male', 'fnardi0@yahoo.com', '7', '19');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Regrant', 'Lints', 15433965, '08/03/2022', 'Female', 'clints1@goodreads.com', '10', '18');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('It', 'Gudyer', 73490711, '01/12/2021', 'Female', 'wgudyer2@t-online.de', '7', '12');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Ruben', 60009209, '01/11/2021', 'Male', 'aruben3@so-net.ne.jp', '16', '17');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Fixflex', 'Clampin', 70161783, '12/08/2021', 'Male', 'fclampin4@multiply.com', '14', '20');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Asoka', 'Askham', 73330243, '01/10/2021', 'Male', 'daskham5@ucoz.ru', '12', '15');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Veribet', 'Kittel', 17604322, '01/08/2021', 'Female', 'bkittel6@columbia.edu', '11', '15');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Zathin', 'Snepp', 82201194, '01/09/2021', 'Genderqueer', 'lsnepp7@mysql.com', '10', '14');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Y-Solowarm', 'Macias', 86370664, '01/06/2022', 'Male', 'dmacias8@51.la', '8', '20');
+insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, HorarioInicio, HorarioFin) values ('Keylex', 'Boolsen', 14719697, '01/11/2021', 'Male', 'mboolsen9@mapy.cz', '16', '20');
 
 ----------------------
 

@@ -58,7 +58,7 @@
             </div>
 
             <div class="row mb-3">
-                <label for="ltsEspecialidades" class="col-sm-2 col-form-label">Especialidades</label>
+                <label runat="server" for="ltsEspecialidades" class="col-sm-2 col-form-label">Especialidades</label>
                 <div class="col-sm-10">
                     <asp:DropDownList ID="ltsEspecialidades"
                         AutoPostBack="True"
@@ -70,7 +70,7 @@
                 <asp:Repeater runat="server" id="repEspecialidades">
                     <ItemTemplate>
                             <div>
-                                <asp:Label Text='<%#Eval("Nombre") %>' ID="lblEspecialidad" runat="server" />
+                                <asp:Label runat="server" ID="lblEspecialidades" Text='<%#Eval("Nombre") %>' />
                                 <asp:Button Text="x" CssClass="btn btn-secondary" ID="RestarEspecialidad" OnClick="RestarEspecialidad_Click" runat="server" CommandArgument='<%#Eval("ID") %>' CommandName="EspecialidadID"/>
                             </div>
                     </ItemTemplate>
@@ -78,31 +78,31 @@
             </div>
 
             <div class="row mb-3">
-                <label for="txtDias" class="col-sm-2 col-form-label">Dias</label>
+                <label for="txtDias" class="col-sm-2 col-form-label" runat="server">Dias</label>
                 <div class="col-sm-10">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <input class="form-check-input" runat="server" type="checkbox" id="inlineCheckbox1" value="option1">
                         <label class="form-check-label" for="inlineCheckbox1">Lunes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" runat="server">
                         <label class="form-check-label" for="inlineCheckbox2">Martes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" runat="server">
                         <label class="form-check-label" for="inlineCheckbox3">Miercoles</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1">
-                        <label class="form-check-label" for="inlineCheckbox1">Jueves</label>
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" runat="server">
+                        <label class="form-check-label" for="inlineCheckbox4">Jueves</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
-                        <label class="form-check-label" for="inlineCheckbox2">Viernes</label>
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" runat="server">
+                        <label class="form-check-label" for="inlineCheckbox5">Viernes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                        <label class="form-check-label" for="inlineCheckbox3">Sabados</label>
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6" runat="server">
+                        <label class="form-check-label" for="inlineCheckbox6">Sabados</label>
                     </div>
                 </div>
             </div>
