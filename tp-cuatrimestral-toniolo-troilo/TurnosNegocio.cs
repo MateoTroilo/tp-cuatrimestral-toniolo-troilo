@@ -24,7 +24,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                     Turno aux = new Turno();
                     aux.Id = (int)datos.Reader["IDTurno"];
                     aux.Fecha = (DateTime)datos.Reader["Fecha"];
-                    aux.Estado = (string)datos.Reader["Estado"];
+                    aux.Estado = (Estados)Enum.Parse(typeof(Estados), datos.Reader["Estado"].ToString());
                     aux.Paciente = (string)datos.Reader["Paciente"];
                     aux.Medico = (string)datos.Reader["Medico"];
                     aux.Especialidad = (string)datos.Reader["Especialidad"];
@@ -51,13 +51,12 @@ namespace tp_cuatrimestral_toniolo_troilo
             AccesoDB datos = new AccesoDB();
             try
             {
-                datos.setQuery("Insert into TURNOS(Fecha, Estado, Paciente, Medico, Especialidad, Observacion)values( @Fecha, @Estado, @Paciente, @Medico, @Especialidad, @Observacion)");
+                datos.setQuery("Insert into TURNOS(Fecha, Estado, IDPaciente, IDMedico, Observaciones)values( @Fecha, @Estado, @Paciente, @Medico, @Observaciones)");
                 datos.setParametros("@Fecha", nuevo.Fecha);
                 datos.setParametros("@Estado", nuevo.Estado);
                 datos.setParametros("@Paciente", nuevo.Paciente);
                 datos.setParametros("@Medico", nuevo.Medico);
-                datos.setParametros("@Especialidad", nuevo.Especialidad);
-                datos.setParametros("@Observacion", nuevo.Observacion);
+                datos.setParametros("@Observaciones", nuevo.Observacion);
                 datos.run();
             }
             catch (Exception ex)
@@ -90,6 +89,78 @@ namespace tp_cuatrimestral_toniolo_troilo
             {
 
                 throw ex;
+            }
+        }
+
+        public List<Turno> listar(int idMedico)
+        {
+            List<Turno> lista = new List<Turno>();
+            AccesoDB datos = new AccesoDB();
+
+
+            try
+            {
+                datos.setQuery("select cast(T.IDTurno as int) as IDTurno, T.Fecha, T.Estado, cast(concat(P.Nombre, ' ', P.Apellido,'(', P.IDPaciente, ')' ) as varchar) as Paciente, cast(concat(M.Nombre, ' ', M.Apellido,'(', M.IDMedico, ')' ) as varchar) as Medico, E.Nombre as Especialidad from Turnos as T  inner join Pacientes as P on P.IDPaciente = T.IDPaciente  inner join Medicos as M on M.IDMedico = T.IDMedico inner join Especialidades_x_Medico as Em on Em.IDEspecialidad = M.IDMedico inner join Especialidades as E on E.IDEspecialidad = Em.IDEspecialidad where M.IDMedico = @IDMEDICO and T.Fecha > GETDATE()");
+                datos.setParametros("@IDMEDICO", idMedico);
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    Turno aux = new Turno();
+                    aux.Id = (int)datos.Reader["IDTurno"];
+                    aux.Fecha = (DateTime)datos.Reader["Fecha"];
+                    aux.Estado = (Estados)Enum.Parse(typeof(Estados), datos.Reader["Estado"].ToString());
+                    aux.Paciente = (string)datos.Reader["Paciente"];
+                    aux.Medico = (string)datos.Reader["Medico"];
+                    aux.Especialidad = (string)datos.Reader["Especialidad"];
+                    //aux.Observacion = (string)datos.Reader["Observaciones"];
+
+                    lista.Add(aux);
+                }
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+        }
+
+        public Turno Buscar(int idMedico, int idPaciente, DateTime fecha)
+        {
+            AccesoDB datos = new AccesoDB();
+            Turno aux = new Turno();
+            Estados cancelado = Estados.Cancelado;
+            try
+            {
+                datos.setQuery("select Estado, cast(IDPaciente as varchar) as  IDPaciente,cast(IDMedico as varchar) as IDMedico from Turnos where (IDPaciente = @IDPACIENTE OR IDMedico = @IDMEDICO) and Fecha = @FECHA and not Estado = @ESTADO");
+                datos.setParametros("@IDMEDICO", idMedico);
+                datos.setParametros("@IDPACIENTE", idPaciente);
+                datos.setParametros("@FECHA", fecha);
+                datos.setParametros("@ESTADO", cancelado);
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    aux.Estado = (Estados)Enum.Parse(typeof(Estados), datos.Reader["Estado"].ToString());
+                    aux.Paciente = (string)datos.Reader["IDPaciente"];
+                    aux.Medico = (string)datos.Reader["IDMedico"];
+
+                }
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
             }
         }
 

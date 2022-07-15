@@ -195,5 +195,114 @@ namespace tp_cuatrimestral_toniolo_troilo
             }
         }
 
+        public List<Medico> ListarXEspecialidad(int id)
+        {
+            List<Medico> lista = new List<Medico>();
+            AccesoDB datos = new AccesoDB();
+
+
+            try
+            {
+                datos.setQuery("Select M.* from Especialidades_x_Medico E Inner Join Medicos M on M.IDMedico = E.IDMedico Inner Join Especialidades Es on Es.IDEspecialidad = E.IDEspecialidad Where Es.IDEspecialidad = @ID");
+                datos.setParametros("@ID", id);
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    Medico aux = new Medico();
+                    aux.Id = (int)datos.Reader["IDMedico"];
+                    aux.Nombre = (string)datos.Reader["Nombre"];
+                    aux.Apellido = (string)datos.Reader["Apellido"];
+                    aux.DNI = int.Parse(datos.Reader["DNI"].ToString());
+                    aux.Sexo = (string)datos.Reader["Sexo"];
+                    aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
+                    aux.Email = (string)datos.Reader["Email"];
+                    aux.Horario = new Horario();
+                    aux.Horario.Inicio = (int)datos.Reader["HorarioInicio"];
+                    aux.Horario.Fin = (int)datos.Reader["HorarioFin"];
+
+                    AccesoDB data = new AccesoDB();
+
+                    data.setQuery("select Nombre from Dias_x_Medico as DxM inner join Dias as D on D.IDDia = DxM.IDDia where IDMedico = @ID");
+                    data.setParametros("@ID", aux.Id);
+                    data.read();
+
+                    aux.Horario.Dias = new List<Dias>();
+                    while (data.Reader.Read())
+                    {
+                        aux.Horario.Dias.Add((Dias)Enum.Parse(typeof(Dias), data.Reader["Nombre"].ToString()));
+                    }
+
+                    data.closeConnection();
+
+                    lista.Add(aux);
+
+                }
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+
+            }
+        }
+
+        public Medico Buscar(int id)
+        {
+            AccesoDB datos = new AccesoDB();
+            Medico aux = new Medico();
+            try
+            {
+                datos.setQuery("Select M.* from Especialidades_x_Medico E Inner Join Medicos M on M.IDMedico = E.IDMedico Inner Join Especialidades Es on Es.IDEspecialidad = E.IDEspecialidad Where M.IDMedico = @ID");
+                datos.setParametros("@ID", id);
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    aux.Id = (int)datos.Reader["IDMedico"];
+                    aux.Nombre = (string)datos.Reader["Nombre"];
+                    aux.Apellido = (string)datos.Reader["Apellido"];
+                    aux.DNI = int.Parse(datos.Reader["DNI"].ToString());
+                    aux.Sexo = (string)datos.Reader["Sexo"];
+                    aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
+                    aux.Email = (string)datos.Reader["Email"];
+                    aux.Horario = new Horario();
+                    aux.Horario.Inicio = (int)datos.Reader["HorarioInicio"];
+                    aux.Horario.Fin = (int)datos.Reader["HorarioFin"];
+
+                    AccesoDB data = new AccesoDB();
+
+                    data.setQuery("select Nombre from Dias_x_Medico as DxM inner join Dias as D on D.IDDia = DxM.IDDia where IDMedico = @ID");
+                    data.setParametros("@ID", aux.Id);
+                    data.read();
+
+                    aux.Horario.Dias = new List<Dias>();
+                    while (data.Reader.Read())
+                    {
+                        aux.Horario.Dias.Add((Dias)Enum.Parse(typeof(Dias), data.Reader["Nombre"].ToString()));
+                    }
+
+                    data.closeConnection();
+
+                }
+                    return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+
+            }
+        }
+
     }
 }
