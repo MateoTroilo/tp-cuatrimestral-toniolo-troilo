@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
 
 namespace tp_cuatrimestral_toniolo_troilo
 {
@@ -33,6 +34,23 @@ namespace tp_cuatrimestral_toniolo_troilo
 
                     llenarProximosTurnos();
                     Session.Add("flagTurnos", false);
+                }
+                if (Request.QueryString["ID"] != null)
+                {
+                    int ID = Int32.Parse(Request.QueryString["ID"]);
+
+                    TurnosNegocio negocioTurnos = new TurnosNegocio();
+                    Turno turno = negocioTurnos.Buscar(ID);
+                    Session.Add("turno", turno);
+                    PacienteNegocio negocioPaciente = new PacienteNegocio();
+                    Paciente paciente = negocioPaciente.Buscar(int.Parse(turno.Paciente));
+                    txtPaciente.Text = paciente.DNI.ToString();
+                    ddlEspecialidad.Items.FindByValue(turno.Especialidad).Selected = true;
+                    string medicoID = turno.Medico;
+                    //ddlMedico.Items.FindByValue(medicoID).Selected = true;
+                    Fecha.Text = turno.Fecha.ToString();
+                    ddlHorarios.Items.FindByValue(turno.Fecha.Hour.ToString()).Selected = true;
+                    txtObservaciones.Text = turno.Observacion;
                 }
             }
             catch (Exception ex)
@@ -241,6 +259,17 @@ namespace tp_cuatrimestral_toniolo_troilo
             fechaSeleccionada = fechaSeleccionada.Date + ts;
             TurnosNegocio negocio = new TurnosNegocio();
             Turno turno = negocio.Buscar(medico.Id, paciente.Id, fechaSeleccionada);
+            if (Session["turno"] != null)
+            {
+                Turno turnoUpdated = (Turno)Session["turno"];
+                if(fechaSeleccionada == turnoUpdated.Fecha)
+                {
+                    Session["flagTurnos"] = true;
+                    lblConfirmarFecha.Text = "Fecha y hora confirmadas!";
+                    lblConfirmar.Text = "";
+                    return;
+                }
+            }
             if (turno.Paciente == null)
             {
                 Session["flagTurnos"] = true;
@@ -276,7 +305,8 @@ namespace tp_cuatrimestral_toniolo_troilo
                 {
                     TurnosNegocio negocio = new TurnosNegocio();
                     Turno turno = new Turno(fechaSeleccionada, Estados.Nuevo, paciente.Id.ToString(), medico.Id.ToString(), ddlEspecialidad.SelectedItem.Value, txtObservaciones.Text);
-                    negocio.agregar(turno);
+                    if(Request.QueryString["ID"] != null) negocio.modificar(turno);
+                    else negocio.agregar(turno);
                 }
                 catch (Exception ex)
                 {

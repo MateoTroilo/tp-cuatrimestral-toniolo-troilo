@@ -8,55 +8,18 @@ namespace tp_cuatrimestral_toniolo_troilo
 {
     public class TurnosNegocio
     {
-        public List<Turno> listar()
-        {
-            List<Turno> lista = new List<Turno>();
-            AccesoDB datos = new AccesoDB();
-
-
-            try
-            {
-                datos.setQuery("select cast(T.IDTurno as int) as IDTurno, T.Fecha, T.Estado, cast(concat(P.Nombre, ' ', P.Apellido,'(', P.IDPaciente, ')' ) as varchar) as Paciente, cast(concat(M.Nombre, ' ', M.Apellido,'(', M.IDMedico, ')' ) as varchar) as Medico, E.Nombre as Especialidad from Turnos as T inner join Pacientes as P on P.IDPaciente = T.IDPaciente inner join Medicos as M on M.IDMedico = T.IDMedico inner join Especialidades as E on E.IDEspecialidad = M.IDEspecialidad");
-                datos.read();
-
-                while (datos.Reader.Read())
-                {
-                    Turno aux = new Turno();
-                    aux.Id = (int)datos.Reader["IDTurno"];
-                    aux.Fecha = (DateTime)datos.Reader["Fecha"];
-                    aux.Estado = (Estados)Enum.Parse(typeof(Estados), datos.Reader["Estado"].ToString());
-                    aux.Paciente = (string)datos.Reader["Paciente"];
-                    aux.Medico = (string)datos.Reader["Medico"];
-                    aux.Especialidad = (string)datos.Reader["Especialidad"];
-                    //aux.Observacion = (string)datos.Reader["Observaciones"];
-
-                    lista.Add(aux);
-                }
-
-
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.closeConnection();
-            }
-        }
-
         public void agregar(Turno nuevo)
         {
             AccesoDB datos = new AccesoDB();
             try
             {
-                datos.setQuery("Insert into TURNOS(Fecha, Estado, IDPaciente, IDMedico, Observaciones)values( @Fecha, @Estado, @Paciente, @Medico, @Observaciones)");
+                datos.setQuery("Insert into TURNOS(Fecha, Estado, IDPaciente, IDMedico, Observaciones, IDEspecialidad)values( @Fecha, @Estado, @Paciente, @Medico, @Observaciones, @Especialidad)");
                 datos.setParametros("@Fecha", nuevo.Fecha);
                 datos.setParametros("@Estado", nuevo.Estado);
                 datos.setParametros("@Paciente", nuevo.Paciente);
                 datos.setParametros("@Medico", nuevo.Medico);
                 datos.setParametros("@Observaciones", nuevo.Observacion);
+                datos.setParametros("@Especialidad", nuevo.Especialidad);
                 datos.run();
             }
             catch (Exception ex)
@@ -100,7 +63,7 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             try
             {
-                datos.setQuery("select cast(T.IDTurno as int) as IDTurno, T.Fecha, T.Estado, cast(concat(P.Nombre, ' ', P.Apellido,'(', P.IDPaciente, ')' ) as varchar) as Paciente, cast(concat(M.Nombre, ' ', M.Apellido,'(', M.IDMedico, ')' ) as varchar) as Medico, E.Nombre as Especialidad from Turnos as T  inner join Pacientes as P on P.IDPaciente = T.IDPaciente  inner join Medicos as M on M.IDMedico = T.IDMedico inner join Especialidades_x_Medico as Em on Em.IDEspecialidad = M.IDMedico inner join Especialidades as E on E.IDEspecialidad = Em.IDEspecialidad where M.IDMedico = @IDMEDICO and T.Fecha > GETDATE()");
+                datos.setQuery("select cast(T.IDTurno as int) as IDTurno, T.Fecha, T.Estado, cast(concat(P.Nombre, ' ', P.Apellido,'(', P.IDPaciente, ')' ) as varchar) as Paciente, cast(concat(M.Nombre, ' ', M.Apellido,'(', M.IDMedico, ')' ) as varchar) as Medico, T.IDEspecialidad from Turnos as T  inner join Pacientes as P on P.IDPaciente = T.IDPaciente  inner join Medicos as M on M.IDMedico = T.IDMedico inner join Especialidades as E on E.IDEspecialidad = T.IDEspecialidad where M.IDMedico = @IDMEDICO and T.Fecha > GETDATE()");
                 datos.setParametros("@IDMEDICO", idMedico);
                 datos.read();
 
@@ -112,7 +75,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                     aux.Estado = (Estados)Enum.Parse(typeof(Estados), datos.Reader["Estado"].ToString());
                     aux.Paciente = (string)datos.Reader["Paciente"];
                     aux.Medico = (string)datos.Reader["Medico"];
-                    aux.Especialidad = (string)datos.Reader["Especialidad"];
+                    //aux.IDEspecialidad = (string)datos.Reader["Especialidad"];
                     //aux.Observacion = (string)datos.Reader["Observaciones"];
 
                     lista.Add(aux);
@@ -153,6 +116,77 @@ namespace tp_cuatrimestral_toniolo_troilo
 
                 }
                 return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+        }
+
+        public Turno Buscar(int idTurno)
+        {
+            AccesoDB datos = new AccesoDB();
+            Turno aux = new Turno();
+            try
+            {
+                datos.setQuery("select * from Turnos where IDTurno = @IDTURNO");
+                datos.setParametros("@IDTURNO", idTurno);
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    aux.Id = (int)datos.Reader["IDTurno"];
+                    aux.Estado = (Estados)Enum.Parse(typeof(Estados), datos.Reader["Estado"].ToString());
+                    aux.Paciente = (string)datos.Reader["IDPaciente"].ToString();
+                    aux.Medico = (string)datos.Reader["IDMedico"].ToString();
+                    aux.Fecha = (DateTime)datos.Reader["Fecha"];
+                    aux.Especialidad = (string)datos.Reader["IDEspecialidad"].ToString();
+
+                }
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+        }
+
+        public List<Turno> listarPlanilla(int idMedico = -1)
+        {
+            List<Turno> lista = new List<Turno>();
+            AccesoDB datos = new AccesoDB();
+
+            try
+            {
+                if (idMedico > -1) datos.setQuery("select cast(T.IDTurno as int) as IDTurno, T.Fecha, T.Estado, cast(concat(P.Nombre, ' ', P.Apellido,'(', P.IDPaciente, ')' ) as varchar) as Paciente, cast(concat(M.Nombre, ' ', M.Apellido,'(', M.IDMedico, ')' ) as varchar) as Medico, E.Nombre as Especialidad from Turnos as T  inner join Pacientes as P on P.IDPaciente = T.IDPaciente  inner join Medicos as M on M.IDMedico = T.IDMedico inner join Especialidades as E on E.IDEspecialidad = T.IDEspecialidad where M.IDMedico = @IDMEDICO and T.Fecha > GETDATE()");
+                else datos.setQuery("select cast(T.IDTurno as int) as IDTurno, T.Fecha, T.Estado, cast(concat(P.Nombre, ' ', P.Apellido,'(', P.IDPaciente, ')' ) as varchar) as Paciente, cast(concat(M.Nombre, ' ', M.Apellido,'(', M.IDMedico, ')' ) as varchar) as Medico, E.Nombre as Especialidad  from Turnos as T  inner join Pacientes as P on P.IDPaciente = T.IDPaciente  inner join Medicos as M on M.IDMedico = T.IDMedico inner join Especialidades as E on E.IDEspecialidad = T.IDEspecialidad  where T.Fecha > GETDATE()");
+                datos.setParametros("@IDMEDICO", idMedico);
+                datos.read();
+
+                while (datos.Reader.Read())
+                {
+                    Turno aux = new Turno();
+                    aux.Id = (int)datos.Reader["IDTurno"];
+                    aux.Fecha = (DateTime)datos.Reader["Fecha"];
+                    aux.Estado = (Estados)Enum.Parse(typeof(Estados), datos.Reader["Estado"].ToString());
+                    aux.Paciente = (string)datos.Reader["Paciente"];
+                    aux.Medico = (string)datos.Reader["Medico"];
+                    aux.Especialidad = (string)datos.Reader["Especialidad"];
+                    //aux.Observacion = (string)datos.Reader["Observaciones"];
+
+                    lista.Add(aux);
+                }
+
+
+                return lista;
             }
             catch (Exception ex)
             {

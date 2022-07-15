@@ -11,9 +11,9 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            TurnosNegocio negocio = new TurnosNegocio();
-            dgvTurnos.DataSource = negocio.listar();
-            dgvTurnos.DataBind();
+            //TurnosNegocio negocio = new TurnosNegocio();
+            //dgvTurnos.DataSource = negocio.listar();
+            //dgvTurnos.DataBind();
         }
     }
 }

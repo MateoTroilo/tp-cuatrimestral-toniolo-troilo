@@ -48,6 +48,7 @@ create table Turnos(
 	Estado varchar(50) null,
 	IDPaciente int not null foreign key references Pacientes(IDPaciente),
 	IDMedico int not null foreign key references Medicos(IDMedico),
+    IDEspecialidad int not null foreign key references Especialidades(IDEspecialidad),
 	Observaciones text null,
 )
 
@@ -156,6 +157,7 @@ insert into Especialidades (Nombre) values ('Supervisor');
 insert into Especialidades (Nombre) values ('Electrician');
 insert into Especialidades (Nombre) values ('Construction Foreman');
 insert into Especialidades (Nombre) values ('Subcontractor');
+insert into Especialidades (Nombre) values ('General');
 
 ----------------------
 
@@ -169,6 +171,16 @@ insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (5, 2);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (3, 7);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (5, 7);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (7, 7);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 1);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 2);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 3);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 4);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 5);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 6);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 7);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 8);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 9);
+insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (10, 10);
 
 ----------------------
 
@@ -185,16 +197,16 @@ insert into Dias_x_Medico (IDDia, IDMedico) values (3, 8);
 
 ----------------------
 
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('10/30/2021', 'true', 8, 3, 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('11/25/2021', 'false', 9, 7, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('5/11/2022', 'false', 5, 7, 'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/9/2021', 'false', 5, 7, 'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('6/27/2022', 'true', 9, 3, 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/28/2021', 'false', 5, 7, 'Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('4/20/2022', 'false', 9, 3, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('7/7/2021', 'true', 9, 4, 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('10/1/2021', 'false', 6, 7, 'Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, Observaciones) values ('3/15/2022', 'true', 1, 3, 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('10/30/2021', 'true', 8, 3, 10, 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('11/25/2021', 'false', 9, 7, 10, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('5/11/2022', 'false', 5, 7, 10, 'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/9/2021', 'false', 5, 7, 10, 'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('6/27/2022', 'true', 9, 3, 10, 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/28/2021', 'false', 5, 7, 10, 'Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('4/20/2022', 'false', 9, 3, 10, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/7/2021', 'true', 9, 4, 10, 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('10/1/2021', 'false', 6, 7, 10, 'Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.');
+insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('3/15/2022', 'true', 1, 3, 10, 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.');
 
 ---------------------
 

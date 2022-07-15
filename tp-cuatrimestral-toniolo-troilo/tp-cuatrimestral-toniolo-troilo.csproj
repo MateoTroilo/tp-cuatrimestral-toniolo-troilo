@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Turnos.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="LoginExitoso.aspx" />
     <Content Include="Medicos.aspx" />
@@ -98,6 +99,13 @@
     </Compile>
     <Compile Include="AccesoDB.cs" />
     <Compile Include="Especialidad.cs" />
+    <Compile Include="Turnos.aspx.cs">
+      <DependentUpon>Turnos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Turnos.aspx.designer.cs">
+      <DependentUpon>Turnos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LogOut.aspx.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
