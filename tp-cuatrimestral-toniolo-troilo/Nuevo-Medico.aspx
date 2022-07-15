@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Nuevo-Medico.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Nuevo_Medico" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Nuevo-Medico.aspx.cs" Inherits="tp_cuatrimestral_toniolo_troilo.Nuevo_Medico" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -47,13 +47,6 @@
                 <label for="Fecha" class="col-sm-2 col-form-label">Fecha</label>
                 <div class="col-sm-10">
                     <asp:TextBox runat="server" CssClass="form-control" ID="Fecha" type="Date" />
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="txtObraSocial" class="col-sm-2 col-form-label">Plan</label>
-                <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="txtObraSocial" type="text" />
                 </div>
             </div>
 

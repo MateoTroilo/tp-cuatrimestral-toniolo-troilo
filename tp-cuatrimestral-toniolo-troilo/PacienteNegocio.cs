@@ -39,7 +39,7 @@ namespace tp_cuatrimestral_toniolo_troilo
             AccesoDB db = new AccesoDB();
             try
             {
-                db.setQuery("update Pacientes set Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, FechaNacimiento = @FechaNacimiento, Email = @Email, ObraSocial = @ObraSocial where Id = @Id");
+                db.setQuery("update Pacientes set Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, FechaNacimiento = @FechaNacimiento, Email = @Email, ObraSocial = @ObraSocial where IDPaciente = @Id");
                 db.setParametros("@Nombre", paciente.Nombre);
                 db.setParametros("@Apellido", paciente.Apellido);
                 db.setParametros("@DNI", paciente.DNI);
@@ -47,6 +47,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                 db.setParametros("@Sexo", paciente.Sexo);
                 db.setParametros("@Email", paciente.Email);
                 db.setParametros("@IDPlan", paciente.ObraSocial);
+                db.setParametros("@ID", paciente.Id);
 
                 db.run();
             }
@@ -179,13 +180,17 @@ namespace tp_cuatrimestral_toniolo_troilo
         public void Eliminar(int ID)
         {
             AccesoDB db = new AccesoDB();
-
+            db.Open();
             try
             {
-                db.setQuery("delete from pacientes where IDPaciente = @IDPaciente");
                 db.setParametros("@IDPaciente", ID);
 
-                db.run();
+                db.setQuery("delete from Turnos where IDPaciente = @IDPaciente");
+                db.rerun();
+
+                db.setQuery("delete from Pacientes where IDPaciente = @IDPaciente");
+                db.rerun();
+
             }
             catch (Exception ex)
             {

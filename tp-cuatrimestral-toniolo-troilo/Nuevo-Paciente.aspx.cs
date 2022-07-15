@@ -87,8 +87,17 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             try
             {
-                paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
-                negocio.Agregar(paciente);
+                if(Request.QueryString["ID"] != null)
+                {
+                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
+                    negocio.Modificar(paciente);
+                }
+                else
+                {
+                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
+                    negocio.Agregar(paciente);
+                }
+                
             }
             catch (Exception ex)
             {

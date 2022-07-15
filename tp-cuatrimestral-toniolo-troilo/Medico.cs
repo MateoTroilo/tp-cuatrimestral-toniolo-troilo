@@ -29,7 +29,7 @@ namespace tp_cuatrimestral_toniolo_troilo
 
         public Medico()
         {
-
+            Horario = new Horario();
         }
 
     }

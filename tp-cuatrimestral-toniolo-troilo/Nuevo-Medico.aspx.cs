@@ -33,6 +33,46 @@ namespace tp_cuatrimestral_toniolo_troilo
             {
                 Session.Add("error", ex);
             }
+
+
+            if (Request.QueryString["ID"] != null)
+            {
+                int ID = Int32.Parse(Request.QueryString["ID"]);
+
+                MedicoNegocio MedNegocio = new MedicoNegocio();
+                Medico medico = MedNegocio.Buscar(ID);
+
+                txtNombre.Text = medico.Nombre;
+                txtApellido.Text = medico.Apellido;
+                txtDNI.Text = medico.DNI.ToString();
+                txtEmail.Text = medico.Email;
+                //       dD/mM/aaaa
+
+                string aux = medico.FechaNacimiento.ToString().Substring(medico.FechaNacimiento.ToString().LastIndexOf("/")).TrimStart('/');
+                string aaaa = aux.Substring(0, aux.LastIndexOf(" ") + 1).TrimEnd(' ');
+
+                string aux1 = medico.FechaNacimiento.ToString().Substring(0, medico.FechaNacimiento.ToString().LastIndexOf("/") + 1);
+                string mm = aux1.Substring(aux1.IndexOf("/")).TrimEnd('/').TrimStart('/');
+                if (mm.Length == 1) { mm = "0" + mm; }
+
+                string dd = medico.FechaNacimiento.ToString().Substring(0, medico.FechaNacimiento.ToString().IndexOf("/") + 1).TrimEnd('/');
+                if (dd.Length == 1) { dd = "0" + dd; }
+
+                Fecha.Text = aaaa + '-' + mm + '-' + dd;
+
+                switch (medico.Sexo)
+                {
+                    case "Female":
+                        femenino.Checked = true;
+                        break;
+                    case "Male":
+                        masculino.Checked = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -92,11 +132,24 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             try
             {
-                int HoraInicio = int.Parse(HorarioInicio.Text.ToString().Substring(0, HorarioInicio.Text.ToString().IndexOf(":") + 1).TrimEnd(':')) * 100;
-                int HoraFin = int.Parse(HorarioFin.Text.ToString().Substring(0, HorarioFin.Text.ToString().IndexOf(":") + 1).TrimEnd(':')) * 100;
+                if (Request.QueryString["ID"] != null)
+                {
+                    int HoraInicio = int.Parse(HorarioInicio.Text.ToString().Substring(0, HorarioInicio.Text.ToString().IndexOf(":") + 1).TrimEnd(':'));
+                    int HoraFin = int.Parse(HorarioFin.Text.ToString().Substring(0, HorarioFin.Text.ToString().IndexOf(":") + 1).TrimEnd(':'));
 
-                medico = new Medico(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(Fecha.Text), int.Parse(txtDNI.Text), txtEmail.Text, HoraInicio, HoraFin, listaDias, medicoEspecialidades);
-                negocio.Agregar(medico);
+                    medico = new Medico(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(Fecha.Text), int.Parse(txtDNI.Text), txtEmail.Text, HoraInicio, HoraFin, listaDias, medicoEspecialidades);
+                    negocio.Modificar(medico);
+                }
+
+                else
+                {
+                    int HoraInicio = int.Parse(HorarioInicio.Text.ToString().Substring(0, HorarioInicio.Text.ToString().IndexOf(":") + 1).TrimEnd(':'));
+                    int HoraFin = int.Parse(HorarioFin.Text.ToString().Substring(0, HorarioFin.Text.ToString().IndexOf(":") + 1).TrimEnd(':'));
+
+                    medico = new Medico(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(Fecha.Text), int.Parse(txtDNI.Text), txtEmail.Text, HoraInicio, HoraFin, listaDias, medicoEspecialidades);
+                    negocio.Agregar(medico);
+                }
+                
             }
             catch (Exception ex)
             {

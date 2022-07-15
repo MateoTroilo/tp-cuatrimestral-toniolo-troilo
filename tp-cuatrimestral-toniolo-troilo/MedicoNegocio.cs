@@ -117,18 +117,25 @@ namespace tp_cuatrimestral_toniolo_troilo
         public void Modificar(Medico medico)
         {
             AccesoDB db = new AccesoDB();
+            int ID = medico.Id;
+
+            //Datos Personales
             try
             {
-                db.setQuery("update Pacientes set Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, FechaNacimiento = @FechaNacimiento, Email = @Email, ObraSocial = @ObraSocial where Id = @Id");
+
+                db.setQuery("update Medicos set Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, FechaNacimiento = @FechaNacimiento, Email = @Email, Sexo = @Sexo,HorarioInicio = @HorarioInicio, HorarioFin @HorarioFin where IDMedico = @ID");
+                db.setParametros("@ID", medico.Id);
                 db.setParametros("@Nombre", medico.Nombre);
                 db.setParametros("@Apellido", medico.Apellido);
                 db.setParametros("@DNI", medico.DNI);
                 db.setParametros("@FechaNacimiento", medico.FechaNacimiento);
                 db.setParametros("@Sexo", medico.Sexo);
                 db.setParametros("@Email", medico.Email);
-                db.setParametros("@IDEspecialidad", medico.Especialidades);
+                db.setParametros("@HorarioInicio", medico.Horario.Inicio);
+                db.setParametros("@HorarioFin", medico.Horario.Fin);
 
                 db.run();
+
             }
             catch (Exception ex)
             {
@@ -138,6 +145,61 @@ namespace tp_cuatrimestral_toniolo_troilo
             finally
             {
                 db.closeConnection();
+            }
+
+            ////////Guardar Especialidades
+            AccesoDB db2 = new AccesoDB();
+            db2.Open();
+            db2.setParametros("@IDMedico", ID);
+            try
+            {
+                db2.setQuery("delete from Especialidades_x_Medico where IDMedico = @IDMedico");
+                db2.rerun();
+
+                for (int i = 0; i < medico.Especialidades.Count; i++)
+                {
+                    db2.setQuery("insert into Especialidades_x_Medico(IDMedico, IDEspecialidad) values (@IDMedico, @IDEspecialidad" + i + ")");
+                    db2.setParametros(("@IDEspecialidad" + i), medico.Especialidades[i].ID);
+                    db2.rerun();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            finally
+            {
+                db2.closeConnection();
+            }
+
+            ////////Guardar Dias
+            AccesoDB db3 = new AccesoDB();
+            db3.Open();
+            db3.setParametros("@IDMedico", ID);
+            try
+            {
+                db3.setQuery("delete from Dias_x_Medico where IDMedico = @IDMedico");
+                db3.rerun();
+
+                for (int i = 0; i < medico.Horario.Dias.Count; i++)
+                {
+                    db3.setQuery("insert into Dias_x_Medico(IDDia, IDMedico) values(@IDDia" + i + ", @IDMedico)");
+                    db3.setParametros(("@IDDia" + i), ((int)medico.Horario.Dias[i] + 1).ToString());
+                    db3.rerun();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                db3.closeConnection();
             }
         }
 
@@ -158,25 +220,26 @@ namespace tp_cuatrimestral_toniolo_troilo
                     aux.Id = (int)datos.Reader["IDMedico"];
                     aux.Nombre = (string)datos.Reader["Nombre"];
                     aux.Apellido = (string)datos.Reader["Apellido"];
-                    aux.DNI = (int)datos.Reader["DNI"];
+                    aux.DNI = Int32.Parse((string)datos.Reader["DNI"]);
                     aux.Sexo = (string)datos.Reader["Sexo"];
                     aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
                     aux.Email = (string)datos.Reader["Email"];
-                    aux.Horario.Inicio = Int32.Parse(datos.Reader["Horario Inicio"].ToString().Substring(0, datos.Reader["Horario Inicio"].ToString().IndexOf(":") + 1));
-                    aux.Horario.Fin = Int32.Parse(datos.Reader["Horario Fin"].ToString().Substring(0, datos.Reader["Horario Fin"].ToString().IndexOf(":") + 1));
+                    aux.Horario.Inicio = (int)datos.Reader["HorarioInicio"];
+                    aux.Horario.Fin = (int)datos.Reader["HorarioFin"];
 
-                    AccesoDB data = new AccesoDB();
+                    ////////////////////////////<<<<<<<<<<<<<<<<<<
+                    //AccesoDB data = new AccesoDB();
 
-                    data.setQuery("select Nombre from Dias_x_Medico as DxM inner join Dias as D on D.IDDia = DxM.IDDia where IDMedico = @ID");
-                    data.setParametros("@ID", aux.Id);
+                    //data.setQuery("select Nombre from Dias_x_Medico as DxM inner join Dias as D on D.IDDia = DxM.IDDia where IDMedico = @ID");
+                    //data.setParametros("@ID", aux.Id);
 
-                    while (datos.Reader.Read())
-                    {
-                        aux.Horario.Dias.Add((Dias)data.Reader["Nombre"]);
-                    }
+                    //while (data.Reader.Read())
+                    //{
+                    //    aux.Horario.Dias.Add((Dias)data.Reader["Nombre"]);
+                    //}
 
-                    data.closeConnection();
-
+                    //data.closeConnection();
+                    /////////////////////////////<<<<<<<<<<<<<<<<<
                     lista.Add(aux);
 
                 }
@@ -303,6 +366,39 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             }
         }
+
+        public void Eliminar(int ID)
+        {
+            AccesoDB db = new AccesoDB();
+            db.Open();
+            try
+            {
+                db.setParametros("@IDMedico", ID);
+
+                db.setQuery("delete from Turnos where IDMedico = @IDMedico");
+                db.rerun();
+
+                db.setQuery("delete from Dias_x_Medico where IDMedico = @IDMedico");
+                db.rerun();
+
+                db.setQuery("delete from Especialidades_x_Medico where IDMedico = @IDMedico");
+                db.rerun();
+
+                db.setQuery("delete from Medicos where IDMedico = @IDMedico");
+                db.rerun();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                db.closeConnection();
+            }
+        }
+
 
     }
 }

@@ -70,6 +70,7 @@
     <Content Include="Default.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="LoginExitoso.aspx" />
+    <Content Include="Medicos.aspx" />
     <Content Include="Modificar-ObraSocial.aspx" />
     <Content Include="Modificar-Paciente.aspx" />
     <Content Include="Modificar-Turno.aspx" />
@@ -114,6 +115,13 @@
     </Compile>
     <Compile Include="MedicoNegocio.cs" />
     <Compile Include="Medico.cs" />
+    <Compile Include="Medicos.aspx.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Medicos.aspx.designer.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modificar-ObraSocial.aspx.cs">
       <DependentUpon>Modificar-ObraSocial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

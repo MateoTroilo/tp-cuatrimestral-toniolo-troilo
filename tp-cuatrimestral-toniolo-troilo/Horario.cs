@@ -27,6 +27,14 @@ namespace tp_cuatrimestral_toniolo_troilo
         // 1600
         // medico
 
-            // list<Horario>
+        // list<Horario>
+        public Horario()
+        {
+            Dias = new List<Dias>();
+        }
+
     }
+
+    
+
 }
