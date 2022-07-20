@@ -148,16 +148,16 @@ insert into Medicos (Nombre, Apellido, DNI, FechaNacimiento, Sexo, Email, Horari
 
 ----------------------
 
-insert into Especialidades (Nombre) values ('Construction Expeditor');
-insert into Especialidades (Nombre) values ('Electrician');
-insert into Especialidades (Nombre) values ('Construction Manager');
-insert into Especialidades (Nombre) values ('Architect');
-insert into Especialidades (Nombre) values ('Surveyor');
-insert into Especialidades (Nombre) values ('Supervisor');
-insert into Especialidades (Nombre) values ('Electrician');
-insert into Especialidades (Nombre) values ('Construction Foreman');
-insert into Especialidades (Nombre) values ('Subcontractor');
-insert into Especialidades (Nombre) values ('General');
+insert into Especialidades (Nombre) values ('Alergista');
+insert into Especialidades (Nombre) values ('Cardiólogo');
+insert into Especialidades (Nombre) values ('Dermatólogo');
+insert into Especialidades (Nombre) values ('Cirujano');
+insert into Especialidades (Nombre) values ('Infectólogo');
+insert into Especialidades (Nombre) values ('Endocrinólogo');
+insert into Especialidades (Nombre) values ('Pediatra');
+insert into Especialidades (Nombre) values ('Traumatólogo');
+insert into Especialidades (Nombre) values ('Urólogo');
+insert into Especialidades (Nombre) values ('Oftalmólogo');
 
 ----------------------
 
@@ -194,6 +194,9 @@ insert into Dias_x_Medico (IDDia, IDMedico) values (2, 8);
 insert into Dias_x_Medico (IDDia, IDMedico) values (4, 9);
 insert into Dias_x_Medico (IDDia, IDMedico) values (5, 6);
 insert into Dias_x_Medico (IDDia, IDMedico) values (3, 8);
+insert into Dias_x_Medico (IDDia, IDMedico) values (3, 5);
+insert into Dias_x_Medico (IDDia, IDMedico) values (5, 7);
+insert into Dias_x_Medico (IDDia, IDMedico) values (1, 10);
 
 ----------------------
 
