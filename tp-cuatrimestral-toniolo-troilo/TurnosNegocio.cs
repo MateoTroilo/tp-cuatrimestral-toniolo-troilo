@@ -197,6 +197,15 @@ namespace tp_cuatrimestral_toniolo_troilo
                 datos.closeConnection();
             }
         }
-
+        //public List<Estados> Estados()
+        //{
+        //    List<Estados> lista = new List<Estados>();
+        //    foreach (Estados value in Enum.GetValues(typeof(Estados)))
+        //    {
+        //        Estados aux = value;
+        //        lista.Add(aux);
+        //    }
+        //    return lista;
+        //}
     }
 }

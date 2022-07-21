@@ -32,6 +32,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                     ddlMedico.DataValueField = "medicoId";
                     ddlMedico.DataBind();
 
+                    
                     llenarProximosTurnos();
                     Session.Add("flagTurnos", false);
                 }
@@ -45,12 +46,25 @@ namespace tp_cuatrimestral_toniolo_troilo
                     PacienteNegocio negocioPaciente = new PacienteNegocio();
                     Paciente paciente = negocioPaciente.Buscar(int.Parse(turno.Paciente));
                     txtPaciente.Text = paciente.DNI.ToString();
-                    ddlEspecialidad.Items.FindByValue(turno.Especialidad).Selected = true;
+                    txtPaciente_TextChanged(sender, e);
+                    ddlEspecialidad.SelectedValue = turno.Especialidad;
                     string medicoID = turno.Medico;
-                    //ddlMedico.Items.FindByValue(medicoID).Selected = true;
-                    Fecha.Text = turno.Fecha.ToString();
-                    ddlHorarios.Items.FindByValue(turno.Fecha.Hour.ToString()).Selected = true;
+                    int idEspecialidad = int.Parse(ddlEspecialidad.SelectedItem.Value);
+                    MedicoNegocio negocio = new MedicoNegocio();
+                    List<Medico> medicos = negocio.ListarXEspecialidad(idEspecialidad);
+                    var MedicoQuery = medicos.Select(medico => new { medicoId = medico.Id, medicoNombreCompleto = medico.Nombre + " " + medico.Apellido });
+                    ddlMedico.DataSource = MedicoQuery;
+                    ddlMedico.DataTextField = "medicoNombreCompleto";
+                    ddlMedico.DataValueField = "medicoId";
+                    ddlMedico.DataBind();
+                    ddlMedico.SelectedValue = medicoID;
+                    Fecha.Text = turno.Fecha.ToString("yyyy-MM-dd");
+                    string asd = turno.Fecha.ToString();
+                    asd = turno.Fecha.Hour.ToString();
+                    setearHoras();
+                    ddlHorarios.SelectedValue = turno.Fecha.Hour.ToString();
                     txtObservaciones.Text = turno.Observacion;
+                    //setearEstados();
                 }
             }
             catch (Exception ex)
@@ -204,6 +218,16 @@ namespace tp_cuatrimestral_toniolo_troilo
             ddlHorarios.DataBind();
         }
 
+        //protected void setearEstados()
+        //{
+
+            
+        //    ddlEstado.DataSource = Estados;
+        //    ddlMedico.DataTextField = "medicoNombreCompleto";
+        //    ddlMedico.DataValueField = "medicoId";
+        //    ddlMedico.DataBind();
+
+        //}
         protected void btnConfirmarFecha_Click(object sender, EventArgs e)
         {
             if (Session["paciente"] == null)

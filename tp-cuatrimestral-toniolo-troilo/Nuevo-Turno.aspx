@@ -57,6 +57,18 @@
                     <asp:Label ID="lblConfirmarFecha" runat="server" Text=""></asp:Label>
                 </div>
             </div>
+
+            <%if (Request.QueryString["ID"] != null)
+                { %>
+            <div class="row mb-3">
+                <label for="txtEstado" class="col-sm-2 col-form-label">Estado</label>
+                <div class="col-sm-10">
+                    <asp:DropDownList ID="ddlEstado" runat="server" CssClass="btn btn-outline-dark dropdown-togglez">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <%} %>
+
             <div class="row mb-3">
                 <label for="txtObservaciones" class="col-sm-2 col-form-label">Observaciones</label>
                 <div class="col-sm-10">
