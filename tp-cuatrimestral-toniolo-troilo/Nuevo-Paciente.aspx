@@ -9,14 +9,18 @@
             <div class="row mb-3">
                 <label for="txtNombre" class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="txtNombre" type="text" />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="txtNombre" MaxLength="20" type="text" />
+                    <asp:RegularExpressionValidator ID="vldNombre" ControlToValidate="txtNombre" Display="Dynamic" ErrorMessage="No puede ingresar numeros" ValidationExpression="^[A-Za-z]*$" Runat="server"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator Display = "Dynamic" ControlToValidate = "txtNombre" ID="RegularExpressionValidator3" ValidationExpression = "^[\s\S]{3,20}$" runat="server" ErrorMessage="Entre 3 y 20 caracteres"></asp:RegularExpressionValidator>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label for="txtApellido" class="col-sm-2 col-form-label">Apellido</label>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="txtApellido" type="text" />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="txtApellido" MaxLength="20"  type="text" />
+                    <asp:RegularExpressionValidator ID="vldApellido" ControlToValidate="txtApellido" Display="Dynamic" ErrorMessage="No puede ingresar numeros" ValidationExpression="^[A-Za-z]*$" Runat="server"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator Display = "Dynamic" ControlToValidate = "txtApellido" ID="RegularExpressionValidator2" ValidationExpression = "^[\s\S]{3,20}$" runat="server" ErrorMessage="Entre 3 y 20 caracteres"></asp:RegularExpressionValidator>
                 </div>
             </div>
 
@@ -33,6 +37,7 @@
                 <label for="txtDNI" class="col-sm-2 col-form-label">DNI</label>
                 <div class="col-sm-10">
                     <asp:TextBox runat="server" CssClass="form-control" ID="txtDNI" type="number" />
+                    <asp:RegularExpressionValidator Display = "Dynamic" ControlToValidate = "txtDNI" ID="RegularExpressionValidator1" ValidationExpression = "^[\s\S]{8,8}$" runat="server" ErrorMessage="Maximum 8 characters allowed."></asp:RegularExpressionValidator>
                 </div>
             </div>
 
@@ -50,12 +55,12 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <%--<div class="row mb-3">
                 <label for="txtObraSocial" class="col-sm-2 col-form-label">Plan</label>
                 <div class="col-sm-10">
                     <asp:TextBox runat="server" CssClass="form-control" ID="txtObraSocial" type="text" />
                 </div>
-            </div>
+            </div>--%>
             
             
             <asp:Button Text="Guardar" CssClass="btn btn-primary" ID="btnRegistrar" OnClick="btnRegistrar_Click" runat="server" />

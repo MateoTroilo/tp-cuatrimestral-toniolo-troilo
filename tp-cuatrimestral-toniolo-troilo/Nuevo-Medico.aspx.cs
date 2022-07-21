@@ -11,6 +11,7 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             EspecialidadNegocio negocio = new EspecialidadNegocio();
             List<Especialidad> medicoEspecialidades = new List<Especialidad>();
             try
@@ -76,6 +77,9 @@ namespace tp_cuatrimestral_toniolo_troilo
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if(!Page.IsValid) return;
+
             Medico medico;
             MedicoNegocio negocio = new MedicoNegocio();
 
@@ -177,6 +181,23 @@ namespace tp_cuatrimestral_toniolo_troilo
             ((List<Especialidad>)Session["medicoEspecialidades"]).Remove(((List<Especialidad>)Session["listaEspecialidades"]).Find(x => x.ID == id));
             repEspecialidades.DataSource = (List<Especialidad>)Session["medicoEspecialidades"];
             repEspecialidades.DataBind();
+        }
+        protected void HorarioFin_OnTextChanged(object sender, EventArgs e)
+        {
+            int HoraInicio = int.Parse(HorarioInicio.Text.ToString().Substring(0, HorarioInicio.Text.ToString().IndexOf(":") + 1).TrimEnd(':'));
+            int HoraFin = int.Parse(HorarioFin.Text.ToString().Substring(0, HorarioFin.Text.ToString().IndexOf(":") + 1).TrimEnd(':'));
+
+            
+
+            if (HoraInicio > HoraFin || HoraInicio == HoraFin) 
+            {
+                HorarioCheck.InnerText = "El horario seleccionado termina al dia siguiente!";
+            }
+            else
+            {
+                HorarioCheck.InnerText = " ";
+            }
+            
         }
     }
 }

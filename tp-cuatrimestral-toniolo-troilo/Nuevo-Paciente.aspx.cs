@@ -11,6 +11,7 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
 
             if (Session["usuario"] == null)
             {
@@ -38,7 +39,8 @@ namespace tp_cuatrimestral_toniolo_troilo
                 txtApellido.Text = paciente.Apellido;
                 txtDNI.Text = paciente.DNI.ToString();
                 txtEmail.Text = paciente.Email;
-                txtObraSocial.Text = paciente.ObraSocial;
+                paciente.ObraSocial = null;
+                //txtObraSocial.Text = paciente.ObraSocial;
                 //       dD/mM/aaaa
 
                 string aux = paciente.FechaNacimiento.ToString().Substring(paciente.FechaNacimiento.ToString().LastIndexOf("/")).TrimStart('/');
@@ -69,6 +71,9 @@ namespace tp_cuatrimestral_toniolo_troilo
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if (!Page.IsValid) return;
+
             string sex = null;
             Paciente paciente;
             PacienteNegocio negocio = new PacienteNegocio();
@@ -89,12 +94,12 @@ namespace tp_cuatrimestral_toniolo_troilo
             {
                 if(Request.QueryString["ID"] != null)
                 {
-                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
+                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, null);
                     negocio.Modificar(paciente);
                 }
                 else
                 {
-                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, txtObraSocial.Text);
+                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, null);
                     negocio.Agregar(paciente);
                 }
                 
