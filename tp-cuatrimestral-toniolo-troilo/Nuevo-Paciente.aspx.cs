@@ -39,7 +39,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                 txtApellido.Text = paciente.Apellido;
                 txtDNI.Text = paciente.DNI.ToString();
                 txtEmail.Text = paciente.Email;
-                paciente.ObraSocial = null;
+                paciente.ObraSocial = 1;
                 //txtObraSocial.Text = paciente.ObraSocial;
                 //       dD/mM/aaaa
 
@@ -94,12 +94,12 @@ namespace tp_cuatrimestral_toniolo_troilo
             {
                 if(Request.QueryString["ID"] != null)
                 {
-                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, null);
+                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, 1);
                     negocio.Modificar(paciente);
                 }
                 else
                 {
-                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, null);
+                    paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, 1);
                     negocio.Agregar(paciente);
                 }
                 

@@ -26,6 +26,7 @@ namespace tp_cuatrimestral_toniolo_troilo
             PacienteNegocio negocio = new PacienteNegocio();
             dgvPacientes.DataSource = negocio.listar();
             dgvPacientes.DataBind();
+            dgvPacientes.Columns[2].Visible = false;
         }
         protected void btnNuevo_Click(object sender, EventArgs e)
         {

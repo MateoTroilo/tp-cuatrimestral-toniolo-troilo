@@ -16,7 +16,7 @@ create table Pacientes(
 	FechaNacimiento datetime not null,
 	Sexo varchar(20) null,
 	Email varchar(50) not null unique,
-	IDObraSocial int null foreign key references ObrasSociales(IDObraSocial),
+	IDObraSocial varchar(100) null
 )
 
 create table Especialidades(
@@ -225,5 +225,3 @@ insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Obser
 insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('3/15/2022', 2, 1, 3, 10, 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.');
 
 ---------------------
-
-

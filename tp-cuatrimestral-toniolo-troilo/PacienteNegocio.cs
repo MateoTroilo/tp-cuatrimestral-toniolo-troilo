@@ -83,7 +83,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                     aux.Sexo = (string)datos.Reader["Sexo"];
                     aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
                     aux.Email = (string)datos.Reader["Email"];
-                    aux.ObraSocial = (string)datos.Reader["Obra Social"];
+                    //aux.ObraSocial = (string)datos.Reader["Obra Social"];
 
                     lista.Add(aux);
                 }
@@ -122,7 +122,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                     aux.Sexo = (string)datos.Reader["Sexo"];
                     aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
                     aux.Email = (string)datos.Reader["Email"];
-                    aux.ObraSocial = (string)datos.Reader["Obra Social"];
+                    //aux.ObraSocial = (string)datos.Reader["Obra Social"];
 
                 }
 
@@ -160,7 +160,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                     aux.Sexo = (string)datos.Reader["Sexo"];
                     aux.FechaNacimiento = (DateTime)datos.Reader["FechaNacimiento"];
                     aux.Email = (string)datos.Reader["Email"];
-                    aux.ObraSocial = (string)datos.Reader["Obra Social"];
+                    //aux.ObraSocial = (string)datos.Reader["Obra Social"];
 
                 }
 
