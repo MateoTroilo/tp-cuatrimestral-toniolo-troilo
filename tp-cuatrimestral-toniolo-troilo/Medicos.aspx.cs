@@ -11,6 +11,12 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes estar logueado para ingresar a esta pantalla.");
+                Response.Redirect("error.aspx", false);
+                return;
+            }
             MedicoNegocio negocio = new MedicoNegocio();
             dgvMedicos.DataSource = negocio.Listar();
             dgvMedicos.DataBind();

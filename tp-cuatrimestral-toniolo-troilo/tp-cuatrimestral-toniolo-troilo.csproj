@@ -89,6 +89,7 @@
     <Content Include="Nueva-Especialidad.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailService.cs" />
     <Compile Include="EstadoNegocio.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="EspecialidadNegocio.cs" />

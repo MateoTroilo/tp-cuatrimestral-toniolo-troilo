@@ -21,9 +21,9 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="~/Medico-Turno.aspx">Turnos</a>
+                            <a runat="server" class="nav-link" href="~/Turnos.aspx">Turnos</a>
                         </li>
-                        <% if (((tp_cuatrimestral_toniolo_troilo.Usuarios)Session["usuario"]).TipoUsuario != tp_cuatrimestral_toniolo_troilo.TipoUsuario.ADMIN)
+                        <% if (((tp_cuatrimestral_toniolo_troilo.Usuarios)Session["usuario"]).TipoUsuario != tp_cuatrimestral_toniolo_troilo.TipoUsuario.MEDICO)
                             { %>
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Pacientes.aspx">Pacientes</a>
@@ -31,7 +31,7 @@
                         <% } %>
 
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="~/Medico-Turno.aspx">Médicos</a>
+                            <a runat="server" class="nav-link" href="~/Medicos.aspx">Médicos</a>
                         </li>
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/LogOut.aspx">Log Out</a>
@@ -42,6 +42,7 @@
         </nav>
         <% } %>
     </header>
+    <br />
     <form id="form1" runat="server">
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>

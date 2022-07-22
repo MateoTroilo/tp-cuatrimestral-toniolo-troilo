@@ -12,6 +12,20 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes estar logueado para ingresar a esta pantalla.");
+                Response.Redirect("error.aspx", false);
+                return;
+            }
+
+            if (Request.QueryString["ID"] == null && ((Usuarios)Session["usuario"]).TipoUsuario == TipoUsuario.MEDICO)
+            {
+                Session.Add("error", "No tienes permisos para ingresar a esta pantalla.");
+                Response.Redirect("error.aspx", false);
+                return;
+            }
+
             EspecialidadNegocio negocioEspecialidad = new EspecialidadNegocio();
             try
             {
@@ -333,11 +347,29 @@ namespace tp_cuatrimestral_toniolo_troilo
                 {
                     TurnosNegocio negocio = new TurnosNegocio();
                     Turno turno = new Turno(fechaSeleccionada, Estados.Nuevo, paciente.Id.ToString(), medico.Id.ToString(), ddlEspecialidad.SelectedItem.Value, txtObservaciones.Text);
-                    if (Request.QueryString["ID"] != null) {
+                    if (Request.QueryString["ID"] != null)
+                    {
                         turno.Estado = (Estados)Enum.Parse(typeof(Estados), ddlEstado.SelectedItem.Value);
-                        negocio.modificar(turno, int.Parse(Request.QueryString["ID"])); 
+                        negocio.modificar(turno, int.Parse(Request.QueryString["ID"]));
+                        Response.Write(@"<script language='javascript'>alert(' Modificado Correctamente ')</script>");
+                        Response.Redirect("Turnos.aspx", false);
                     }
-                    else negocio.agregar(turno);
+                    else 
+                    { 
+                        negocio.agregar(turno);
+                        EmailService emailService = new EmailService();
+                        try
+                        {
+                            turno.Especialidad = ddlEspecialidad.SelectedItem.Text;
+                            emailService.enviarMail(paciente, medico, turno);
+                        }
+                        catch (Exception ex)
+                        {
+                            Session.Add("error", ex);
+                        }
+                        Response.Write(@"<script language='javascript'>alert(' Agregado Correctamente ')</script>");
+                        Response.Redirect("Turnos.aspx", false);
+                    }
                 }
                 catch (Exception ex)
                 {

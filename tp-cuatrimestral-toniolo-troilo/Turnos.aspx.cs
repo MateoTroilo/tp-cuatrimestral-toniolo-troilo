@@ -11,25 +11,16 @@ namespace tp_cuatrimestral_toniolo_troilo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["usuario"] == null)
-            //{
-            //    Session.Add("error", "Debes estar logueado para ingresar a esta pantalla.");
-            //    Response.Redirect("error.aspx", false);
-            //    return;
-            //}
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes estar logueado para ingresar a esta pantalla.");
+                Response.Redirect("error.aspx", false);
+                return;
+            }
+            TurnosNegocio negocio = new TurnosNegocio();
+            dgvTurnos.DataSource = negocio.listarPlanilla();
+            dgvTurnos.DataBind();
 
-            if (Session["usuario"] == null || ((Usuarios)Session["usuario"]).TipoUsuario == TipoUsuario.MEDICO)
-            {
-                TurnosNegocio negocio = new TurnosNegocio();
-                dgvTurnos.DataSource = negocio.listarPlanilla();
-                dgvTurnos.DataBind();
-            }
-            else
-            {
-                TurnosNegocio negocio = new TurnosNegocio();
-                dgvTurnos.DataSource = negocio.listarPlanilla();
-                dgvTurnos.DataBind();
-            }
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -41,7 +32,7 @@ namespace tp_cuatrimestral_toniolo_troilo
             dgvTurnos.SelectRow(rowindex);
             GridViewRow row = dgvTurnos.SelectedRow;
 
-            int ID = Int32.Parse(row.Cells[1].Text);
+            int ID = Int32.Parse(row.Cells[2].Text);
 
             Response.Redirect("Nuevo-Turno.aspx?ID=" + ID, false);
         }
@@ -61,6 +52,11 @@ namespace tp_cuatrimestral_toniolo_troilo
             negocio.Eliminar(ID);
 
             Response.Redirect(Request.RawUrl);
+        }
+
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Nuevo-Turno.aspx", false);
         }
     }
 }
