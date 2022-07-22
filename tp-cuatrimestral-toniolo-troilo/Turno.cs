@@ -8,10 +8,10 @@ namespace tp_cuatrimestral_toniolo_troilo
 {
     public enum Estados
     {
-        Nuevo,
-        Cancelado,
-        NoAsistio,
-        Cerrado
+        Nuevo = 1,
+        Cancelado = 2,
+        NoAsistio = 3,
+        Cerrado = 4
     }
     public class Turno
     {

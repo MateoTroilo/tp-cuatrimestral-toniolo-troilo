@@ -41,7 +41,7 @@
             <div class="row mb-3">
                 <label for="Fecha" class="col-sm-2 col-form-label">Fecha</label>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control" ID="Fecha" type="Date"/>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="Fecha" type="Date" />
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <asp:Button Text="Agendar" CssClass="btn btn-primary" ID="btnAgendar" OnClick="btnAgendar_Click" runat="server" />
+            <asp:Button Text="Agendar" CssClass="btn btn-primary" ID="btnAgendar" OnClick="btnAgendar_Click" runat="server" AutoPostback="true" />
             <asp:Label ID="lblConfirmar" runat="server" Text=""></asp:Label>
                 </ContentTemplate>
         </asp:UpdatePanel>

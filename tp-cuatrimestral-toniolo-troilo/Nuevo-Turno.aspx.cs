@@ -35,36 +35,42 @@ namespace tp_cuatrimestral_toniolo_troilo
                     
                     llenarProximosTurnos();
                     Session.Add("flagTurnos", false);
-                }
-                if (Request.QueryString["ID"] != null)
-                {
-                    int ID = Int32.Parse(Request.QueryString["ID"]);
+                    if (Request.QueryString["ID"] != null)
+                    {
+                        int ID = Int32.Parse(Request.QueryString["ID"]);
 
-                    TurnosNegocio negocioTurnos = new TurnosNegocio();
-                    Turno turno = negocioTurnos.Buscar(ID);
-                    Session.Add("turno", turno);
-                    PacienteNegocio negocioPaciente = new PacienteNegocio();
-                    Paciente paciente = negocioPaciente.Buscar(int.Parse(turno.Paciente));
-                    txtPaciente.Text = paciente.DNI.ToString();
-                    txtPaciente_TextChanged(sender, e);
-                    ddlEspecialidad.SelectedValue = turno.Especialidad;
-                    string medicoID = turno.Medico;
-                    int idEspecialidad = int.Parse(ddlEspecialidad.SelectedItem.Value);
-                    MedicoNegocio negocio = new MedicoNegocio();
-                    List<Medico> medicos = negocio.ListarXEspecialidad(idEspecialidad);
-                    var MedicoQuery = medicos.Select(medico => new { medicoId = medico.Id, medicoNombreCompleto = medico.Nombre + " " + medico.Apellido });
-                    ddlMedico.DataSource = MedicoQuery;
-                    ddlMedico.DataTextField = "medicoNombreCompleto";
-                    ddlMedico.DataValueField = "medicoId";
-                    ddlMedico.DataBind();
-                    ddlMedico.SelectedValue = medicoID;
-                    Fecha.Text = turno.Fecha.ToString("yyyy-MM-dd");
-                    string asd = turno.Fecha.ToString();
-                    asd = turno.Fecha.Hour.ToString();
-                    setearHoras();
-                    ddlHorarios.SelectedValue = turno.Fecha.Hour.ToString();
-                    txtObservaciones.Text = turno.Observacion;
-                    //setearEstados();
+                        TurnosNegocio negocioTurnos = new TurnosNegocio();
+                        Turno turno = negocioTurnos.Buscar(ID);
+                        Session.Add("turno", turno);
+                        PacienteNegocio negocioPaciente = new PacienteNegocio();
+                        Paciente paciente = negocioPaciente.Buscar(int.Parse(turno.Paciente));
+                        txtPaciente.Text = paciente.DNI.ToString();
+                        txtPaciente_TextChanged(sender, e);
+                        ddlEspecialidad.SelectedValue = turno.Especialidad;
+                        string medicoID = turno.Medico;
+                        int idEspecialidad = int.Parse(ddlEspecialidad.SelectedItem.Value);
+                        MedicoNegocio negocioTurno = new MedicoNegocio();
+                        List<Medico> medicosTurno = negocioTurno.ListarXEspecialidad(idEspecialidad);
+                        var MedicoQueryTurno = medicosTurno.Select(medico => new { medicoId = medico.Id, medicoNombreCompleto = medico.Nombre + " " + medico.Apellido });
+                        ddlMedico.DataSource = MedicoQueryTurno;
+                        ddlMedico.DataTextField = "medicoNombreCompleto";
+                        ddlMedico.DataValueField = "medicoId";
+                        ddlMedico.DataBind();
+                        ddlMedico.SelectedValue = medicoID;
+                        Fecha.Text = turno.Fecha.ToString("yyyy-MM-dd");
+                        setearHoras();
+                        ddlHorarios.SelectedValue = turno.Fecha.Hour.ToString();
+                        txtObservaciones.Text = turno.Observacion;
+                        EstadoNegocio negocioEstado = new EstadoNegocio();
+                        List<Estado> listaEstado = negocioEstado.listar();
+                        ddlEstado.DataSource = listaEstado;
+                        ddlEstado.DataTextField = "Nombre";
+                        ddlEstado.DataValueField = "ID";
+                        ddlEstado.DataBind();
+                        ddlEstado.SelectedItem.Text = turno.Estado.ToString();
+                        btnAgendar.Text = "Editar";
+                        txtObservaciones.Text = turno.Observacion;
+                    }
                 }
             }
             catch (Exception ex)
@@ -218,16 +224,6 @@ namespace tp_cuatrimestral_toniolo_troilo
             ddlHorarios.DataBind();
         }
 
-        //protected void setearEstados()
-        //{
-
-            
-        //    ddlEstado.DataSource = Estados;
-        //    ddlMedico.DataTextField = "medicoNombreCompleto";
-        //    ddlMedico.DataValueField = "medicoId";
-        //    ddlMedico.DataBind();
-
-        //}
         protected void btnConfirmarFecha_Click(object sender, EventArgs e)
         {
             if (Session["paciente"] == null)
@@ -299,6 +295,7 @@ namespace tp_cuatrimestral_toniolo_troilo
                 Session["flagTurnos"] = true;
                 lblConfirmarFecha.Text = "Fecha y hora confirmadas!";
                 lblConfirmar.Text = "";
+                Session.Add("flagFechaChanged", fechaSeleccionada);
                 return;
             }
             if (int.Parse(turno.Paciente) == paciente.Id && int.Parse(turno.Medico) == medico.Id) 
@@ -307,8 +304,8 @@ namespace tp_cuatrimestral_toniolo_troilo
                 Session["flagTurnos"] = false;
                 return;
             }
-            if (int.Parse(turno.Paciente) == paciente.Id) lblConfirmarFecha.Text = "Turno ocupado por paciente";
-            if (int.Parse(turno.Medico) == medico.Id) lblConfirmarFecha.Text = "Turno ocupado por médico";
+            if (int.Parse(turno.Paciente) == paciente.Id) { lblConfirmarFecha.Text = "Turno ocupado por paciente"; Session["flagTurnos"] = false; }
+            if (int.Parse(turno.Medico) == medico.Id) { lblConfirmarFecha.Text = "Turno ocupado por médico"; Session["flagTurnos"] = false; }
         }
 
         protected void btnAgendar_Click(object sender, EventArgs e)
@@ -316,20 +313,30 @@ namespace tp_cuatrimestral_toniolo_troilo
             if(lblConfirmarFecha.Text != "Fecha y hora confirmadas!")
             {
                 lblConfirmar.Text = "Confirmar fecha y hora!";
+                lblConfirmarFecha.Text = "";
+                return;
+            }
+            DateTime fechaSeleccionada = Convert.ToDateTime(Fecha.Text);
+            TimeSpan ts = new TimeSpan(int.Parse(ddlHorarios.SelectedItem.Value), 0, 0);
+            fechaSeleccionada = fechaSeleccionada.Date + ts;
+            if (Session["flagFechaChanged"] != null && (DateTime)Session["flagFechaChanged"] != fechaSeleccionada)
+            {
+                lblConfirmar.Text = "Cambiaste la fecha del turno, volver a confirmar fecha y hora!";
                 return;
             }
             if ((bool)Session["flagTurnos"])
             {
-                DateTime fechaSeleccionada = Convert.ToDateTime(Fecha.Text);
-                TimeSpan ts = new TimeSpan(int.Parse(ddlHorarios.SelectedItem.Value), 0, 0);
-                fechaSeleccionada = fechaSeleccionada.Date + ts;
+                
                 Medico medico = (Medico)Session["medico"];
                 Paciente paciente = (Paciente)Session["paciente"];
                 try
                 {
                     TurnosNegocio negocio = new TurnosNegocio();
                     Turno turno = new Turno(fechaSeleccionada, Estados.Nuevo, paciente.Id.ToString(), medico.Id.ToString(), ddlEspecialidad.SelectedItem.Value, txtObservaciones.Text);
-                    if(Request.QueryString["ID"] != null) negocio.modificar(turno);
+                    if (Request.QueryString["ID"] != null) {
+                        turno.Estado = (Estados)Enum.Parse(typeof(Estados), ddlEstado.SelectedItem.Value);
+                        negocio.modificar(turno, int.Parse(Request.QueryString["ID"])); 
+                    }
                     else negocio.agregar(turno);
                 }
                 catch (Exception ex)
@@ -340,5 +347,6 @@ namespace tp_cuatrimestral_toniolo_troilo
             }
             else lblConfirmar.Text = "Hay errores en el formulario";
         }
+
     }
 }

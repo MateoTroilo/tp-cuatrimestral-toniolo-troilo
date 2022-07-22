@@ -18,11 +18,11 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
-           <%-- <asp:TemplateField>
+            <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button runat="server" ButtonType="Button" Text="Delete" OnClientClick="return confirm('Eliminar paciente?');" OnClick="DeleteBtnClick" />
+                    <asp:Button ID="btnEliminar" runat="server" ButtonType="Button" Text="Delete" OnClientClick="return confirm('Cancelar turno?');" OnClick="btnEliminar_Click" />
                 </ItemTemplate>
-            </asp:TemplateField>--%>
+            </asp:TemplateField>
 
         </Columns>
 

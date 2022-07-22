@@ -24,6 +24,11 @@ create table Especialidades(
 	Nombre varchar(120) not null
 )
 
+create table Estados(
+	IDEstado int not null primary key identity (1, 1),
+	Nombre varchar(30) not null
+)
+
 create table Medicos(
 	IDMedico int not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
@@ -45,7 +50,7 @@ Create Table Especialidades_x_Medico(
 create table Turnos(
 	IDTurno int not null primary key identity (1, 1),
 	Fecha datetime not null,
-	Estado varchar(50) null,
+	IDEstado int not null foreign key references Estados(IDEstado),
 	IDPaciente int not null foreign key references Pacientes(IDPaciente),
 	IDMedico int not null foreign key references Medicos(IDMedico),
     IDEspecialidad int not null foreign key references Especialidades(IDEspecialidad),
@@ -161,6 +166,13 @@ insert into Especialidades (Nombre) values ('Oftalmólogo');
 
 ----------------------
 
+insert into Estados (Nombre) values ('Nuevo');
+insert into Estados (Nombre) values ('Cancelado');
+insert into Estados (Nombre) values ('No asistió');
+insert into Estados (Nombre) values ('Cerrado');
+
+----------------------
+
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (1, 1);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (5, 1);
 insert into Especialidades_x_Medico (IDEspecialidad, IDMedico) values (3, 1);
@@ -201,16 +213,16 @@ insert into Dias_x_Medico (IDDia, IDMedico) values (1, 10);
 
 ----------------------
 
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('10/30/2022 10:00.000', 0, 8, 3, 10, 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('11/25/2022 11:00.000', 1, 9, 7, 10, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('5/11/2022', 2, 5, 7, 10, 'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/9/2022', 3, 5, 7, 10, 'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('6/27/2022', 0, 9, 3, 10, 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/28/2022  12:00.000', 1, 5, 7, 10, 'Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('4/20/2022', 2, 9, 3, 10, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/7/2022', 3, 9, 4, 10, 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('10/1/2022  14:00.000', 0, 6, 7, 10, 'Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.');
-insert into Turnos (Fecha, Estado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('3/15/2022', 1, 1, 3, 10, 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('10/30/2022 10:00.000', 1, 8, 3, 10, 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('11/25/2022 11:00.000', 2, 9, 7, 10, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('5/11/2022', 3, 5, 7, 10, 'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/9/2022', 4, 5, 7, 10, 'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('6/27/2022', 1, 9, 3, 10, 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/28/2022  12:00.000', 2, 5, 7, 10, 'Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('4/20/2022', 3, 9, 3, 10, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('7/7/2022', 4, 9, 4, 10, 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('10/1/2022  14:00.000', 1, 6, 7, 10, 'Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.');
+insert into Turnos (Fecha, IDEstado, IDPaciente, IDMedico, IDEspecialidad, Observaciones) values ('3/15/2022', 2, 1, 3, 10, 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.');
 
 ---------------------
 

@@ -45,5 +45,22 @@ namespace tp_cuatrimestral_toniolo_troilo
 
             Response.Redirect("Nuevo-Turno.aspx?ID=" + ID, false);
         }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            int rowindex = gvr.RowIndex;
+
+            dgvTurnos.SelectRow(rowindex);
+            GridViewRow row = dgvTurnos.SelectedRow;
+
+            int ID = Int32.Parse(row.Cells[2].Text);
+
+            TurnosNegocio negocio = new TurnosNegocio();
+            negocio.Eliminar(ID);
+
+            Response.Redirect(Request.RawUrl);
+        }
     }
 }
