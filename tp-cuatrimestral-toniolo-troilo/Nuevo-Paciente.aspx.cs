@@ -94,15 +94,17 @@ namespace tp_cuatrimestral_toniolo_troilo
             {
                 if(Request.QueryString["ID"] != null)
                 {
+                    int ID = Int32.Parse(Request.QueryString["ID"]);
+
                     paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, 1);
-                    negocio.Modificar(paciente);
+                    negocio.Modificar(paciente, ID);
                 }
                 else
                 {
                     paciente = new Paciente(txtNombre.Text, txtApellido.Text, sex, DateTime.Parse(FechaNacimineto.Text), int.Parse(txtDNI.Text), txtEmail.Text, 1);
                     negocio.Agregar(paciente);
                 }
-                
+                Response.Redirect("Pacientes.aspx", false);
             }
             catch (Exception ex)
             {

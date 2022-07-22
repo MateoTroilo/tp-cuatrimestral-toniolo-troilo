@@ -123,7 +123,7 @@ namespace tp_cuatrimestral_toniolo_troilo
             try
             {
 
-                db.setQuery("update Medicos set Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, FechaNacimiento = @FechaNacimiento, Email = @Email, Sexo = @Sexo,HorarioInicio = @HorarioInicio, HorarioFin @HorarioFin where IDMedico = @ID");
+                db.setQuery("update Medicos set Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, FechaNacimiento = @FechaNacimiento, Email = @Email, Sexo = @Sexo,HorarioInicio = @HorarioInicio, HorarioFin = @HorarioFin where IDMedico = @ID");
                 db.setParametros("@ID", medico.Id);
                 db.setParametros("@Nombre", medico.Nombre);
                 db.setParametros("@Apellido", medico.Apellido);
